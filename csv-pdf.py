@@ -104,11 +104,11 @@ def generate_pdf(csv_file_path, output_file_name):
         logo,
         Spacer(1, 6),
         Paragraph(name, name_style),
-        Spacer(1, 6),  # Add some space
+        Spacer(1, 6),
         Paragraph("Report Card", report_card_style),
-        Spacer(1, 4),  # Add some space
+        Spacer(1, 4),
         Paragraph(cohort_name, cohort_name_style),
-        Spacer(1, 12),  # Add some space
+        Spacer(1, 12),
     ]
 
     table = Table(data)
