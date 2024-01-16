@@ -1,0 +1,97 @@
+Projects,Description,Sample
+Github,username,@sample
+0,Prework,✓
+M1 - E1,Node-Git-CLI,✓
+M1 - E2,HTML & CSS,✓
+M1 - E3,Javascript: DOM,✓
+M1 - E4,JS: Logger-Func-Vars,🟩
+M1 - E5,JS: Array,🟩
+M1 - E6,Managing JSON,✓
+M1 - E8,SRS,✓
+M1 - E7,Testing,🟩
+M1 - E8,Dice,✓
+M1 - E9,GITHUB.io,O
+,,
+M2 - P1,Exercises: HTML,✓
+M2 - P2,Exercises: HTML,✓
+M2 - P3,Exercises: CSS,✓
+M2 - P3,Lab 2.1: HTML,✓
+M2 - P3,Lab 2.2: CSS Basics,✓
+M2 - P3,Lab 2.3: Flexbox,✓
+M2 - P3,Lab 2.4: Website,
+M2 - P3,Lab 2.5: Resposive Website,
+,,
+M3 - E1,JS/TS: fundamentals,✓
+M3 - E2,JS/TS: Intermediate 1,✓
+M3 - E2,JS/TS: Intermediate 2,✓
+M3 - E2,JS/TS: Intermediate 3,✓
+M3 - E3,JS/TS: Advanced,✓
+M3 - E3,JS/TS: Advanced 2,✓
+M3 - E3,JS/TS Lab 3.1: Pizza,✓
+,,
+,,
+M4 - E1,Figma,
+M4 - E2,HTML Template,
+M4 - E3,Calculator,✓
+M4 - E4,Bootstrap Cards,✓
+M4 - E5,Manage Data,✓
+M4 - E6,Fetch Data,
+M4 - E7,CSS Animations,✓
+M4 - E8,Moment JS,
+M4 - E9,eCharts,
+M4 - E10,eCommerce Website,
+,,
+1,MINI-PROJECT,
+,,
+M5 - E1,Multi-PORT (express),✓
+M5 - E2,SS Calculator: QUERY PARAMS (mvc),✓
+M5 - E3,SS Calculator: PATH PARAMS (calculator),ic
+M5 - E4,SS Calculator: REQ Headers (friendRoutes),ic
+M5 - E5,SS Calculator: with Controllers,ic
+M5 - E6,SS Calculator: Libraries/User,ic
+M5 - E7 Part 1,SwaggerUI,ic
+M5 - E7 Part 2,M4-E10 with BACKEND,
+,,
+M8 - E1,ERD,
+M8 - E2,MONGODB DB-DESIGN,
+M8 - E3,MySQL DB-DESIGN,
+M8 - E4,REDIS DB-DESIGN,
+,,
+M9 - E1,MVC Calculator(dup),
+M9 - E2,ExpressAPP MongoDB(Mongoose),
+M9 - E3,ExpressAPP Sequelize,
+M9 - E4,ExpressAPP Microservice,
+MX,IS: Questioning Technique,
+M9 - E5,chatAPP Socket IO,
+,,
+3,MINI-PROJECT,
+,,
+M6 - P1,Class 1: Basics,
+M6 - P1,Class 2: Basics,
+M6 - P1,Class 3: Basics-Forms,
+M6 - P1,Section3: Music Mixer Exercise,
+,,
+M7 - P2,Section 1: TODO App,
+M7 - P2,Section 1: Theme Switcher,
+M7 - P2,Section 2: Starting with Next.js,
+M7 - P2,Section 2: TS/Playground,
+M7 - P2,Section 2: TS/NextJS Routes,
+M7 - P2,Section 3: TextToSpeech,
+M7 - P2,Section 4: Focus Management,
+M7 - P2,Section 4: Custom Video Player,
+M7 - P2,Section 5: Tooltip,
+M7 - P2,Section 5: Leaflet Maps,
+MX,IS: Presentations Skills,
+,,
+,,
+M10 - P1,Exercise 1: Docker,
+M10 - P1,Exercise 2: Github Actions,
+MX,IS: Documentation,
+M10 - P2,Exercise 3: Mermaid Documentation,
+M10 - P2,Exercise 4: AWS,
+M10 - P2,Exercise 5: Deployment,
+,,
+2,MINI-PROJECT,
+,,
+⭐️,CAPSTONE,
+,,
