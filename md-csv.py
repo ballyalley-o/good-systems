@@ -76,6 +76,10 @@ md_file_path = '/Users/bally/IOD/progress/progress.md'
 csv_file_path = '/Users/bally/IOD/progress/students/progress.csv'
 
 
-selected_column_index = 9
+selected_column_index = 4
 
 md_to_csv_file(md_file_path, csv_file_path, selected_column_index)
+
+# TODO:after generating the csv, put the table in a pdf file
+
+
