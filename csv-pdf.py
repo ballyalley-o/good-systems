@@ -67,23 +67,20 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
 def generate_pdf(csv_file_path, output_file_name):
     pdf_file_path = f'/Users/bally/IOD/progress/students/{output_file_name}.pdf'
 
-    # Read CSV data
     with open(csv_file_path, 'r') as csv_file:
         reader = csv.reader(csv_file)
         data = list(reader)
 
-    # Create PDF document
+
     doc = SimpleDocTemplate(pdf_file_path, pagesize=letter)
 
-        # Add logo/icon to the top-right corner
-    logo_path = '/Users/bally/IOD/progress/assets/iod.png'  # Replace with the actual path to your logo
+    logo_path = '/Users/bally/IOD/progress/assets/iod.png'
     logo = Image(logo_path, width=150, height=52)
 
-    # Add name at the top
-    name = output_file_name
-    cohort_name = "Cohort XYZ"  # Replace with the actual cohort name
 
-    # Define styles for name, "Report Card," and cohort name
+    name = output_file_name
+    cohort_name = "Cohort XYZ"
+
     name_style = ParagraphStyle(
         'NameStyle',
         parent=getSampleStyleSheet()['Heading1'],
@@ -114,14 +111,10 @@ def generate_pdf(csv_file_path, output_file_name):
         Spacer(1, 12),  # Add some space
     ]
 
- # Adjust width and height as needed
-
-    # Add table from CSV data with TableStyle for grid lines
     table = Table(data)
     table.setStyle(TableStyle([('GRID', (0, 0), (-1, -1), 1, (0, 0, 0))]))
     elements.append(table)
 
-    # Build PDF document
     doc.build(elements)
 
 # file paths
