@@ -1,4 +1,8 @@
 import csv
+import os
+from colorama import Fore, Style, Back
+from dotenv import load_dotenv
+load_dotenv()
 
 def md_to_csv(md_table):
     md_table = md_table.replace('```', '')
@@ -26,10 +30,10 @@ def md_to_csv_file(md_file_path, csv_file_path):
         writer = csv.writer(file)
         writer.writerows(csv_data)
 
-    print(f'Legend CSV file saved to {csv_file_path}')
+    print(Back.BLUE + Fore.WHITE + f' 〉Legend CSV file saved: {csv_file_path}' + Style.RESET_ALL)
 
 # File paths
-md_file_path = '/Users/bally/IOD/progress/legend.md'
-csv_file_path = '/Users/bally/IOD/progress/csv/legend.csv'
+md_file_path = os.getenv('PATH_LEGEND_MD')
+csv_file_path = os.getenv('PATH_LEGEND_CSV')
 
 md_to_csv_file(md_file_path, csv_file_path)

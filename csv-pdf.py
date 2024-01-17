@@ -71,8 +71,7 @@ def md_csv_pdf_file(md_file_path, csv_file_path, selected_column_index):
 
     print(Fore.YELLOW + f' 〉MD file loaded:   {md_file_path} ' + Style.RESET_ALL)
     print(Back.GREEN + Fore.WHITE + f' 〉CSV file saved:  {csv_file_path} ' + Style.RESET_ALL)
-    print(Fore.YELLOW + f' 〉{output_file_name}\'s record saved:  {selected_file_path} ')
-    print(Style.RESET_ALL)
+    print(Fore.YELLOW + f' 〉{output_file_name}\'s record saved:  {selected_file_path} ' + Style.RESET_ALL)
     print(Back.RED + Fore.YELLOW + f' 〉PDF file generated: {output_file_name}.pdf ' + Style.RESET_ALL)
 
 def get_last_name(first_name):
@@ -132,7 +131,7 @@ def generate_pdf(csv_file_path, output_file_name):
         spaceBefore=2,
     )
 
-    legend_file_path = os.getenv('PATH_LEGEND')
+    legend_file_path = os.getenv('PATH_LEGEND_CSV')
 
     with open(legend_file_path, 'r') as legend_file:
         reader = csv.reader(legend_file)

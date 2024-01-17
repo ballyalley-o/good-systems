@@ -1,4 +1,8 @@
 import csv
+import os
+from colorama import Fore, Style, Back
+from dotenv import load_dotenv
+load_dotenv()
 
 def md_to_csv(md_table, selected_column_index):
 
@@ -58,7 +62,8 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
 
     output_file_name = rows[0][2]
 
-    selected_file_path = f'/Users/bally/IOD/progress/students/{output_file_name}.csv'
+    selected_file_path_template = os.getenv('PATH_CSV_SELECT')
+    selected_file_path = selected_file_path_template.replace('{output_file_name}', output_file_name)
 
     with open(selected_file_path, 'w', newline='') as file:
         writer = csv.writer(file)
@@ -66,19 +71,26 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
         rows = [row.split(',') for row in student_table_str.split('\n')]
         writer.writerows(rows)
 
-    print(f'CSV file saved to {csv_file_path}')
-    print(f'{output_file_name}\'s record saved to {selected_file_path}')
+    print(Fore.YELLOW + f' 〉MD file loaded:   {md_file_path} ' + Style.RESET_ALL)
+    print(Back.GREEN + Fore.WHITE + f' 〉CSV file saved:  {csv_file_path} ' + Style.RESET_ALL)
+    print(Fore.YELLOW + f' 〉{output_file_name}\'s record saved:  {selected_file_path} ' + Style.RESET_ALL)
+    print(Back.RED + Fore.YELLOW + f' 〉PDF file generated: {output_file_name}.pdf ' + Style.RESET_ALL)
 
 # file paths
-md_file_path = '/Users/bally/IOD/progress/progress.md'
-csv_file_path = '/Users/bally/IOD/progress/students/progress.csv'
+md_file_path = os.getenv('PATH_MD')
+csv_file_path = os.getenv('PATH_PROGRESS_CSV')
 
 selected_column_index = 4
 
 for i in range(4, 21):
     selected_column_index = i
-    current_csv_file_path = f'/Users/bally/IOD/progress/students/progress_{i}.csv'
+    current_csv_file_path_template = os.getenv('PATH_CSV_LOOP')
+    current_csv_file_path = current_csv_file_path_template.replace('{i}', str(i))
     md_to_csv_file(md_file_path, current_csv_file_path, selected_column_index)
+
+print('\n')
+print(Fore.GREEN + ' 🏆 Done exporting all progress report CSVs for students ' + Style.RESET_ALL)
+print('\n')
 
 
 
