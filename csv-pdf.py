@@ -1,8 +1,13 @@
 import csv
+import os
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import Image
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from dotenv import load_dotenv
+load_dotenv()
 
 def md_to_csv(md_table, selected_column_index):
     md_table = md_table.replace('```', '')
@@ -64,12 +69,20 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
     print(f'{output_file_name}\'s record saved to {selected_file_path}!')
     print(f'PDF file generated: {output_file_name}.pdf')
 
+def get_last_name(first_name):
+
+    return os.getenv(f'{first_name.upper()}')
+
 def generate_pdf(csv_file_path, output_file_name):
-    pdf_file_path = f'/Users/bally/IOD/progress/students/{output_file_name}.pdf'
+    pdf_file_path = f'/Users/bally/IOD/progress/pdf/{output_file_name}.pdf'
 
     with open(csv_file_path, 'r') as csv_file:
         reader = csv.reader(csv_file)
         data = list(reader)
+
+    for row in data[1:]:
+        first_name = data[0][2]
+        full_name = get_last_name(first_name)
 
 
     doc = SimpleDocTemplate(pdf_file_path, pagesize=letter)
@@ -78,13 +91,28 @@ def generate_pdf(csv_file_path, output_file_name):
     logo = Image(logo_path, width=150, height=52)
 
 
-    name = output_file_name
-    cohort_name = "Cohort XYZ"
+    name = f'{full_name}' if full_name else first_name
+    gitu = data[1][2]
+
+    data[1][0] = ''
+    data[1][2] = ''
+    data[0][2] = ''
+
+
+
+
+    cohort_name = os.getenv('COHORT_NAME')
 
     name_style = ParagraphStyle(
         'NameStyle',
         parent=getSampleStyleSheet()['Heading1'],
-        spaceAfter=2,
+        spaceAfter=1,
+    )
+
+    gitu_style = ParagraphStyle(
+        'GitUStyle',
+        parent=getSampleStyleSheet()['Normal'],
+        spaceAfter=1,
     )
 
     report_card_style = ParagraphStyle(
@@ -100,20 +128,60 @@ def generate_pdf(csv_file_path, output_file_name):
         spaceBefore=2,
     )
 
+    # add the legend.csv file to the pdf
+    legend_file_path = '/Users/bally/IOD/progress/csv/legend.csv'
+
+    with open(legend_file_path, 'r') as legend_file:
+        reader = csv.reader(legend_file)
+        legend_data = list(reader)
+
+    # add the legend to the pdf
+    legend = []
+    for row in legend_data:
+        legend.append(row)
+
+    legend_style = ParagraphStyle(
+        'LegendStyle',
+        parent=getSampleStyleSheet()['Normal'],
+        spaceAfter=1,
+    )
+
     elements = [
         logo,
-        Spacer(1, 6),
+        Spacer(2, 6),
         Paragraph(name, name_style),
+        Paragraph(gitu, gitu_style),
         Spacer(1, 6),
-        Paragraph("Report Card", report_card_style),
+        Paragraph("Progress Report Card", report_card_style),
         Spacer(1, 4),
         Paragraph(cohort_name, cohort_name_style),
         Spacer(1, 12),
     ]
 
     table = Table(data)
-    table.setStyle(TableStyle([('GRID', (0, 0), (-1, -1), 1, (0, 0, 0))]))
+    table.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
+        ('BACKGROUND', (0, 0), (-1, 0), 'black'),
+        ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 10),
+    ]))
+
+    legend_table = Table(legend)
+    legend_table.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
+        ('BACKGROUND', (0, 0), (-1, 0), 'black'),
+        ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 10),
+    ]))
+
     elements.append(table)
+    elements.append(Spacer(1, 12))
+    elements.append(Spacer(1, 12))
+    elements.append(Spacer(1, 12))
+
+    elements.append(legend_table)
 
     doc.build(elements)
 
