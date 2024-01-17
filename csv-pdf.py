@@ -65,8 +65,8 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
 
     generate_pdf(selected_file_path, output_file_name)
 
-    print(f'CSV file saved to {csv_file_path}!')
-    print(f'{output_file_name}\'s record saved to {selected_file_path}!')
+    print(f'CSV file saved to {csv_file_path}')
+    print(f'{output_file_name}\'s record saved to {selected_file_path}')
     print(f'PDF file generated: {output_file_name}.pdf')
 
 def get_last_name(first_name):
