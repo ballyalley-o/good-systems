@@ -1,5 +1,6 @@
 import csv
 import os
+from constants.constants import *
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -105,12 +106,12 @@ def generate_pdf(csv_file_path, output_file_name):
         first_name = data[0][2]
         full_name = get_last_name(first_name)
 
+# --------------------------------------------------start build pdf--------------------------------------------------
 
     doc = SimpleDocTemplate(pdf_file_path, pagesize=letter)
 
     logo_path = os.getenv('PATH_LOGO')
-    logo = Image(logo_path, width=150, height=52)
-
+    logo = Image(logo_path, width=100, height=35)
 
     name = f'{full_name}' if full_name else first_name
     gitu = data[1][2]
@@ -124,7 +125,7 @@ def generate_pdf(csv_file_path, output_file_name):
     name_style = ParagraphStyle(
         'NameStyle',
         parent=getSampleStyleSheet()['Heading1'],
-        spaceAfter=1,
+        spaceAfter=4,
     )
 
     gitu_style = ParagraphStyle(
@@ -152,7 +153,6 @@ def generate_pdf(csv_file_path, output_file_name):
         reader = csv.reader(legend_file)
         legend_data = list(reader)
 
-    # add the legend to the pdf
     legend = []
     for row in legend_data:
         legend.append(row)
@@ -162,6 +162,8 @@ def generate_pdf(csv_file_path, output_file_name):
         parent=getSampleStyleSheet()['Normal'],
         spaceAfter=1,
     )
+
+    doc.topMargin -= 20
 
     elements = [
         logo,
@@ -202,6 +204,8 @@ def generate_pdf(csv_file_path, output_file_name):
 
     doc.build(elements)
 
+# --------------------------------------------------end build pdf--------------------------------------------------
+
 # file paths
 md_file_path = os.getenv('PATH_MD')
 csv_file_path = os.getenv('PATH_PROGRESS_CSV')
@@ -215,7 +219,7 @@ for i in range(4, 21):
     md_csv_pdf_file(md_file_path, current_csv_file_path, selected_column_index)
 
 print('\n')
-print(Fore.GREEN + ' 🏆 Done exporting all progress report cards for students ' + Style.RESET_ALL)
+print(Fore.GREEN + DONE_MESSAGE + Style.RESET_ALL)
 print('\n')
 
 

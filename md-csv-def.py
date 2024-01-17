@@ -1,5 +1,6 @@
 import csv
 import os
+from constants.constants import *
 from colorama import Fore, Style, Back
 from dotenv import load_dotenv
 load_dotenv()
