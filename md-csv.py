@@ -75,7 +75,10 @@ csv_file_path = '/Users/bally/IOD/progress/students/progress.csv'
 
 selected_column_index = 4
 
-md_to_csv_file(md_file_path, csv_file_path, selected_column_index)
+for i in range(4, 21):
+    selected_column_index = i
+    current_csv_file_path = f'/Users/bally/IOD/progress/students/progress_{i}.csv'
+    md_to_csv_file(md_file_path, current_csv_file_path, selected_column_index)
 
 
 

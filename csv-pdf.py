@@ -189,10 +189,12 @@ def generate_pdf(csv_file_path, output_file_name):
 md_file_path = '/Users/bally/IOD/progress/progress.md'
 csv_file_path = '/Users/bally/IOD/progress/students/progress.csv'
 
-selected_column_index = 4
+selected_column_index = 5
 
-md_to_csv_file(md_file_path, csv_file_path, selected_column_index)
+for i in range(4, 21):
+    selected_column_index = i
+    current_csv_file_path = f'/Users/bally/IOD/progress/students/progress_{i}.csv'
+    md_to_csv_file(md_file_path, current_csv_file_path, selected_column_index)
 
-#TODO: add the legend at the bottom of the pdf
-#TODO: add the surname by creating a list of full names and then split them into first and last names
+
 
