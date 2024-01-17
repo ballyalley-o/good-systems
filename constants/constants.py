@@ -5,4 +5,4 @@
 # load_dotenv()
 
 # not env just simple constants like:
-DONE_MESSAGE = ' 🏆 Done exporting all progress report carDSs for students '
+DONE_MESSAGE = ' 🏆 Done exporting all progress report cards for students '

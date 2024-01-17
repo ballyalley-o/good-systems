@@ -1,5 +1,6 @@
 import csv
 import os
+from constants.constants import *
 from colorama import Fore, Style, Back
 from dotenv import load_dotenv
 load_dotenv()
@@ -86,7 +87,6 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
     print(Fore.YELLOW + f' 〉MD file loaded:   {md_file_path} ' + Style.RESET_ALL)
     print(Back.GREEN + Fore.WHITE + f' 〉CSV file saved:  {csv_file_path} ' + Style.RESET_ALL)
     print(Fore.YELLOW + f' 〉{output_file_name}\'s record saved:  {selected_file_path} ' + Style.RESET_ALL)
-    print(Back.RED + Fore.YELLOW + f' 〉PDF file generated: {output_file_name}.pdf ' + Style.RESET_ALL)
 
 # file paths
 md_file_path = os.getenv('PATH_MD')
@@ -101,7 +101,7 @@ for i in range(4, 21):
     md_to_csv_file(md_file_path, current_csv_file_path, selected_column_index)
 
 print('\n')
-print(Fore.GREEN + ' 🏆 Done exporting all progress report CSVs for students ' + Style.RESET_ALL)
+print(Fore.GREEN + DONE_MESSAGE + Style.RESET_ALL)
 print('\n')
 
 
