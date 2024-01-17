@@ -79,6 +79,21 @@ def get_last_name(first_name):
     return os.getenv(f'{first_name.upper()}')
 
 def generate_pdf(csv_file_path, output_file_name):
+    """
+    Generate a PDF file based on the provided CSV file.
+
+    Args:
+        csv_file_path (str): The path to the CSV file.
+        output_file_name (str): The name of the output PDF file.
+
+    Returns:
+        None
+    """
+    pdf_file_path_template = os.getenv('PATH_PDF')
+    pdf_file_path = pdf_file_path_template.replace('{output_file_name}', output_file_name)
+
+    # Rest of the code...
+def generate_pdf(csv_file_path, output_file_name):
     pdf_file_path_template = os.getenv('PATH_PDF')
     pdf_file_path = pdf_file_path_template.replace('{output_file_name}', output_file_name)
 

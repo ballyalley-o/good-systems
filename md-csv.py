@@ -44,6 +44,18 @@ def md_to_csv(md_table, selected_column_index):
     return csv_table, student_table
 
 def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
+    """
+    Convert a Markdown table from a file to a CSV file and save it.
+    Additionally, extract a selected column from the Markdown table and save it as a separate CSV file.
+
+    Args:
+        md_file_path (str): The path to the Markdown file.
+        csv_file_path (str): The path to save the converted CSV file.
+        selected_column_index (int): The index of the column to extract and save as a separate CSV file.
+
+    Returns:
+        None
+    """
 
     with open(md_file_path, 'r') as file:
         md_table = file.read()

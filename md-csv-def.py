@@ -21,6 +21,16 @@ def md_to_csv(md_table):
     return csv_lines
 
 def md_to_csv_file(md_file_path, csv_file_path):
+    """
+    Convert a Markdown table from the specified file to a CSV file.
+
+    Args:
+        md_file_path (str): The path to the Markdown file.
+        csv_file_path (str): The path to save the CSV file.
+
+    Returns:
+        None
+    """
     with open(md_file_path, 'r') as file:
         md_table = file.read()
 
