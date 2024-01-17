@@ -5,3 +5,4 @@ assets
 checkout.log
 .env
 pdf
+__pycache__

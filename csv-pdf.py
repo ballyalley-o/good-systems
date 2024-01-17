@@ -2,11 +2,12 @@ import csv
 import os
 from constants.constants import *
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import Image
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from datetime import datetime
 from colorama import Fore, Style, Back
 
 
@@ -19,7 +20,9 @@ def md_to_csv(md_table, selected_column_index):
 
     lines = md_table.split('\n')
 
-    lines = [lines[0]] + [line for line in lines[1:] if 'Derek' not in line]
+    exclude = os.getenv('EXCLUDE')
+
+    lines = [lines[0]] + [line for line in lines[1:] if exclude not in line]
 
     lines = lines[:1] + lines[2:]
 
@@ -200,7 +203,17 @@ def generate_pdf(csv_file_path, output_file_name):
     elements.append(Spacer(1, 12))
     elements.append(Spacer(1, 12))
 
+    elements.append(PageBreak())
+
     elements.append(legend_table)
+
+    now = datetime.now()
+    dt_string = now.strftime("%d %B %Y %H:%M:%S")
+    elements.append(Spacer(1, 12))
+    elements.append(Spacer(1, 12))
+    elements.append(Spacer(1, 12))
+    elements.append(Spacer(1, 12))
+    elements.append(Paragraph(dt_string, legend_style))
 
     doc.build(elements)
 
