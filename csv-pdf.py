@@ -6,6 +6,9 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import Image
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from colorama import Fore, Style, Back
+
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -41,7 +44,7 @@ def md_to_csv(md_table, selected_column_index):
 
     return csv_table, student_table
 
-def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
+def md_csv_pdf_file(md_file_path, csv_file_path, selected_column_index):
     with open(md_file_path, 'r') as file:
         md_table = file.read()
 
@@ -56,7 +59,8 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
 
     output_file_name = rows[0][2]
 
-    selected_file_path = f'/Users/bally/IOD/progress/students/{output_file_name}.csv'
+    selected_file_path_template = os.getenv('PATH_CSV_SELECT')
+    selected_file_path = selected_file_path_template.replace('{output_file_name}', output_file_name)
 
     with open(selected_file_path, 'w', newline='') as file:
         writer = csv.writer(file)
@@ -65,16 +69,19 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
 
     generate_pdf(selected_file_path, output_file_name)
 
-    print(f'CSV file saved to {csv_file_path}')
-    print(f'{output_file_name}\'s record saved to {selected_file_path}')
-    print(f'PDF file generated: {output_file_name}.pdf')
+    print(Fore.YELLOW + f' 〉MD file loaded:   {md_file_path} ' + Style.RESET_ALL)
+    print(Back.GREEN + Fore.WHITE + f' 〉CSV file saved:  {csv_file_path} ' + Style.RESET_ALL)
+    print(Fore.YELLOW + f' 〉{output_file_name}\'s record saved:  {selected_file_path} ')
+    print(Style.RESET_ALL)
+    print(Back.RED + Fore.YELLOW + f' 〉PDF file generated: {output_file_name}.pdf ' + Style.RESET_ALL)
 
 def get_last_name(first_name):
 
     return os.getenv(f'{first_name.upper()}')
 
 def generate_pdf(csv_file_path, output_file_name):
-    pdf_file_path = f'/Users/bally/IOD/progress/pdf/{output_file_name}.pdf'
+    pdf_file_path_template = os.getenv('PATH_PDF')
+    pdf_file_path = pdf_file_path_template.replace('{output_file_name}', output_file_name)
 
     with open(csv_file_path, 'r') as csv_file:
         reader = csv.reader(csv_file)
@@ -87,7 +94,7 @@ def generate_pdf(csv_file_path, output_file_name):
 
     doc = SimpleDocTemplate(pdf_file_path, pagesize=letter)
 
-    logo_path = '/Users/bally/IOD/progress/assets/iod.png'
+    logo_path = os.getenv('PATH_LOGO')
     logo = Image(logo_path, width=150, height=52)
 
 
@@ -97,9 +104,6 @@ def generate_pdf(csv_file_path, output_file_name):
     data[1][0] = ''
     data[1][2] = ''
     data[0][2] = ''
-
-
-
 
     cohort_name = os.getenv('COHORT_NAME')
 
@@ -128,8 +132,7 @@ def generate_pdf(csv_file_path, output_file_name):
         spaceBefore=2,
     )
 
-    # add the legend.csv file to the pdf
-    legend_file_path = '/Users/bally/IOD/progress/csv/legend.csv'
+    legend_file_path = os.getenv('PATH_LEGEND')
 
     with open(legend_file_path, 'r') as legend_file:
         reader = csv.reader(legend_file)
@@ -186,15 +189,20 @@ def generate_pdf(csv_file_path, output_file_name):
     doc.build(elements)
 
 # file paths
-md_file_path = '/Users/bally/IOD/progress/progress.md'
-csv_file_path = '/Users/bally/IOD/progress/students/progress.csv'
+md_file_path = os.getenv('PATH_MD')
+csv_file_path = os.getenv('PATH_PROGRESS_CSV')
 
 selected_column_index = 5
 
 for i in range(4, 21):
     selected_column_index = i
-    current_csv_file_path = f'/Users/bally/IOD/progress/students/progress_{i}.csv'
-    md_to_csv_file(md_file_path, current_csv_file_path, selected_column_index)
+    current_csv_file_path_template = os.getenv('PATH_CSV_LOOP')
+    current_csv_file_path = current_csv_file_path_template.replace('{i}', str(i))
+    md_csv_pdf_file(md_file_path, current_csv_file_path, selected_column_index)
+
+print('\n')
+print(Fore.GREEN + ' 🏆 Done exporting all progress report cards for students ' + Style.RESET_ALL)
+print('\n')
 
 
 
