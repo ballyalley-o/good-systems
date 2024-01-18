@@ -6,3 +6,4 @@ checkout.log
 .env
 pdf
 __pycache__
+__init__
