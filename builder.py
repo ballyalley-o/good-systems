@@ -10,6 +10,10 @@ csv_file_path = os.getenv('PATH_PROGRESS_CSV')
 
 selected_column_index = 5
 
+print('\n')
+print(Fore.GREEN + START_MESSAGE + Style.RESET_ALL)
+print('\n')
+
 for i in range(4, 21):
     selected_column_index = i
     current_csv_file_path_template = os.getenv('PATH_CSV_LOOP')
