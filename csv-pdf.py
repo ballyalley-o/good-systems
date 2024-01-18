@@ -9,8 +9,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from datetime import datetime
 from colorama import Fore, Style, Back
-
-
+from logic.module_count import count_exercises_per_module
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -123,6 +122,7 @@ def generate_pdf(csv_file_path, output_file_name):
     data[1][2] = ''
     data[0][2] = ''
 
+    cohort = os.getenv('COHORT_NAME')
     cohort_name = os.getenv('COHORT_NAME')
 
     name_style = ParagraphStyle(
@@ -141,13 +141,13 @@ def generate_pdf(csv_file_path, output_file_name):
         'ReportCardStyle',
         parent=getSampleStyleSheet()['Normal'],
         spaceBefore=2,
-        spaceAfter=2,
+        spaceAfter=1,
     )
 
     cohort_name_style = ParagraphStyle(
         'CohortNameStyle',
         parent=getSampleStyleSheet()['Normal'],
-        spaceBefore=2,
+        spaceAfter=1,
     )
 
     legend_file_path = os.getenv('PATH_LEGEND_CSV')
@@ -164,6 +164,14 @@ def generate_pdf(csv_file_path, output_file_name):
         'LegendStyle',
         parent=getSampleStyleSheet()['Normal'],
         spaceAfter=1,
+        fontSize=10
+    )
+
+    cutoff_style = ParagraphStyle(
+        'CutOffStyle',
+        parent=getSampleStyleSheet()['Normal'],
+        spaceAfter=4,
+        fontSize=8
     )
 
     doc.topMargin -= 20
@@ -214,6 +222,18 @@ def generate_pdf(csv_file_path, output_file_name):
     elements.append(Spacer(1, 12))
     elements.append(Spacer(1, 12))
     elements.append(Paragraph(dt_string, legend_style))
+    elements.append(Paragraph(CUTOFF_MESSAGE, cutoff_style))
+
+    # elements.append(Spacer(1, 12))
+    # elements.append(Spacer(1, 12))
+    # elements.append(Paragraph("Fast Track:", legend_style))
+    # for module, count in exercise_count_per_module.items():
+    #     elements.append(Paragraph(f"{module}: {count} exercises", legend_style))
+
+    # elements.append(Spacer(1, 12))
+    # elements.append(Paragraph("Unsubmitted:", legend_style))
+    # for module, exercises in unsubmitted_exercises.items():
+    #     elements.append(Paragraph(f"{module}: {', '.join(exercises)} are unsubmitted", legend_style))
 
     doc.build(elements)
 
