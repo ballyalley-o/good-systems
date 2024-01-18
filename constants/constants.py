@@ -6,4 +6,4 @@
 
 # not env just simple constants like:
 DONE_MESSAGE = ' 🏆 Done exporting all progress report cards for students '
-CUTOFF_MESSAGE = ' if submitted after the cutoff date, contact your trainers '
+CUTOFF_MESSAGE = '  If you\'ve submitted completed exercises after receiving this email, please inform your trainers. '
