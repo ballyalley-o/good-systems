@@ -63,7 +63,6 @@ def md_to_csv_file(md_file_path, csv_file_path, selected_column_index):
 
     csv_table, student_table = md_to_csv(md_table, selected_column_index)
 
-    # Write the CSV table to the output file
     with open(csv_file_path, 'w', newline='') as file:
         writer = csv.writer(file)
 
