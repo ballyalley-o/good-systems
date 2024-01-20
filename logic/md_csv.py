@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def md_to_csv(md_table, selected_column_index):
     md_table = md_table.replace('```', '')
@@ -19,6 +21,8 @@ def md_to_csv(md_table, selected_column_index):
         values = line.split('|')
         values = [v.strip() for v in values]
 
+
+
         if len(values) >= (selected_column_index + 1):
             first_column = values[1]
             second_column = values[2]
@@ -33,3 +37,12 @@ def md_to_csv(md_table, selected_column_index):
     csv_table = '\n'.join(csv_lines)
 
     return csv_table, student_table
+
+
+
+md_file_path = os.getenv('PATH_MD')
+csv_file_path = os.getenv('PATH_STUDENT_CSV')
+
+md_to_csv(md_file_path, 4)
+
+
