@@ -13,6 +13,8 @@ selected_column_index = 5
 print('\n')
 print(Fore.GREEN + START_MESSAGE + Style.RESET_ALL)
 print('\n')
+print(Fore.YELLOW + f' 〉Markdown file loaded:   {md_file_path} ' + Style.RESET_ALL)
+print('\n')
 
 for i in range(3, 21):
     selected_column_index = i
