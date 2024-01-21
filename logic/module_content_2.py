@@ -1,7 +1,8 @@
 import os
 import csv
 import sys
-# from generate_pdf import get_last_name
+import re
+from colorama import Fore, Style, Back
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -12,6 +13,7 @@ csv_file_path = csv_file_path_template.replace('{student_name}', student_name)
 def get_last_name(first_name):
 
     return os.getenv(f'{first_name.upper()}')
+
 
 def count_missing_exercises(csv_file_path):
     missing_count = 0
@@ -24,8 +26,7 @@ def count_missing_exercises(csv_file_path):
         next(reader)
 
         full_name = get_last_name(f'{student_name}')
-        # full_name = full_name_template.replace('{student_name}', student_name)
-        print(f"Student: {full_name}")
+        print(Fore.WHITE + Back.CYAN + f" Student: {full_name} " + Style.RESET_ALL)
 
         for row in reader:
             module_prework = row[0]
@@ -35,14 +36,12 @@ def count_missing_exercises(csv_file_path):
 
             module_name
 
-            if module_name.startswith('M') and exercise_status != '✓':
+            if module_name.startswith('M') and exercise_status != '✓' and exercise_status != 'ic' and exercise_status != 'L' and exercise_status != 'U':
                 missing_count += 1
-                # if module_no is the same number as the previous module_no, then add collect them together
-                print(f"{module_no}, MISSING: {missing_count}")
-                # print(f"{module_no}, MISSING: {missing_count}")
+                print(Fore.RED + f"{module_no}, MISSING: {missing_count}" + Style.RESET_ALL)
             if module_name.startswith('M') and exercise_status == 'ic':
                 in_complete += 1
-                print(f"{module_no}, INCOMPLETE: {in_complete}")
+                print(Fore.YELLOW + f"{module_no}, INCOMPLETE: {in_complete}" + Style.RESET_ALL)
             if module_name.startswith('M') and exercise_status == 'L':
                 locked += 1
                 print(f"{module_no}, LOCKED: {locked}")
@@ -53,8 +52,9 @@ def count_missing_exercises(csv_file_path):
     return missing_count, in_complete, locked, un_accepted
 
 missing_count, in_complete, locked, un_accepted = count_missing_exercises(csv_file_path)
-print(f"Number of MISSING exercises: {missing_count}")
-print(f"Number of INCOMPLETE exercises: {in_complete}")
-print(f"Number of LOCKED exercises: {locked}")
-print(f"Number of UNACCEPTED exercises: {un_accepted}")
-
+print("----------------------------------")
+print(Fore.WHITE + Back.LIGHTBLACK_EX + f" TOTALS:                        ⏚ " + Style.RESET_ALL)
+print(f"MISSING exercises: {missing_count}")
+print(f"INCOMPLETE exercises: {in_complete}")
+print(f"LOCKED exercises: {locked}")
+print(f"UNACCEPTED exercises: {un_accepted}")
