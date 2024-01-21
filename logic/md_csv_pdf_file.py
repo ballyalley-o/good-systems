@@ -5,6 +5,17 @@ from .md_csv import md_to_csv
 from .generate_pdf import generate_pdf
 
 def md_csv_pdf_file(md_file_path, csv_file_path, selected_column_index):
+    """
+    Convert a Markdown file to CSV, save the CSV file, and generate a PDF file. for ALL Students
+
+    Args:
+        md_file_path (str): The file path of the Markdown file.
+        csv_file_path (str): The file path to save the CSV file.
+        selected_column_index (int): The index of the column to select from the Markdown table.
+
+    Returns:
+        None
+    """
     with open(md_file_path, 'r') as file:
         md_table = file.read()
 
