@@ -66,5 +66,3 @@ def count_missing_exercises(csv_file_path):
             print(Fore.LIGHTWHITE_EX + f"{module}, UNACCEPTED: {count}" + Style.RESET_ALL)
 
     return missing_counts, in_complete, locked, un_accepted
-
-missing_counts, in_complete, locked, un_accepted = count_missing_exercises(csv_file_path)
