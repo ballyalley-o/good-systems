@@ -4,6 +4,7 @@ load_dotenv()
 
 def md_to_csv(md_table, selected_column_index):
     md_table = md_table.replace('```', '')
+    md_table = md_table.replace('`', '')
     md_table = md_table.replace('**', '')
 
     lines = md_table.split('\n')
