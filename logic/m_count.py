@@ -24,6 +24,7 @@ def count_missing_exercises(csv_file_path):
     in_complete = {}
     locked = {}
     un_accepted = {}
+    in_progress = {}
 
     with open(csv_file_path, 'r') as csv_file:
         reader = csv.reader(csv_file)
@@ -39,7 +40,7 @@ def count_missing_exercises(csv_file_path):
                 exercise_status = row[2] if len(row) > 2 else None
 
                 if module_no is not None:
-                    if exercise_status != '✓' and exercise_status != 'ic' and exercise_status != 'L' and exercise_status != 'U':
+                    if exercise_status != '✓' and exercise_status != 'ic' and exercise_status != 'L' and exercise_status != 'U ' and exercise_status != 'P':
                         missing_counts.setdefault(module_no, 0)
                         missing_counts[module_no] += 1
                     if exercise_status == 'ic':
@@ -52,9 +53,15 @@ def count_missing_exercises(csv_file_path):
                     elif exercise_status == 'U':
                         un_accepted.setdefault(module_no, 0)
                         un_accepted[module_no] += 1
+                    elif exercise_status == 'P':
+                        in_progress.setdefault(module_no, 0)
+                        in_progress[module_no] += 1
 
         for module, count in missing_counts.items():
             print(Fore.RED + f"{module}, MISSING: {count}" + Style.RESET_ALL)
+
+        for module, count in in_progress.items():
+            print(Fore.MAGENTA + f"{module}, INPROGRESS: {count}" + Style.RESET_ALL)
 
         for module, count in in_complete.items():
             print(Fore.YELLOW + f"{module}, INCOMPLETE: {count}" + Style.RESET_ALL)
@@ -65,4 +72,4 @@ def count_missing_exercises(csv_file_path):
         for module, count in un_accepted.items():
             print(Fore.LIGHTWHITE_EX + f"{module}, UNACCEPTED: {count}" + Style.RESET_ALL)
 
-    return missing_counts, in_complete, locked, un_accepted
+    return missing_counts, in_complete, locked, un_accepted, in_progress
