@@ -1,6 +1,7 @@
 import csv
 import os
 from .constants.constants import *
+from .check_all import check_rows
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -48,6 +49,23 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     data[1][0] = ''
     data[1][2] = ''
     data[0][2] = ''
+
+    all_exercises_done = check_rows(data)
+
+    completed_table = Table(data)
+
+    if all_exercises_done:
+        header = [EXERCISES_COMPLETED]
+        completed_table = Table([header])
+        completed_table.setStyle(TableStyle([
+            ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
+            ('BACKGROUND', (0, 0), (-1, 0), 'green'),
+            ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 10),
+        ]))
+
+
 
     cohort = os.getenv('COHORT_NAME')
     cohort_name = os.getenv('COHORT_NAME')
@@ -135,6 +153,10 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         ('FONTSIZE', (0, 0), (-1, 0), 10),
     ]))
 
+# only add the completed table if all exercises are done
+    if all_exercises_done:
+        elements.append(completed_table)
+    elements.append(Spacer(1, 12))
     elements.append(table)
     elements.append(Spacer(1, 12))
     elements.append(Spacer(1, 12))
