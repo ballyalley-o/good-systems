@@ -2,6 +2,7 @@ import csv
 import os
 from .constants.constants import *
 from .check_all import check_rows
+from .style_missing import *
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -58,14 +59,12 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         header = [EXERCISES_COMPLETED]
         completed_table = Table([header])
         completed_table.setStyle(TableStyle([
-            ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
+            ('GRID', (0, 0), (-1, -1), 1, (1, 1, 1)),
             ('BACKGROUND', (0, 0), (-1, 0), 'green'),
             ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
             ('FONTSIZE', (0, 0), (-1, 0), 10),
         ]))
-
-
 
     cohort = os.getenv('COHORT_NAME')
     cohort_name = os.getenv('COHORT_NAME')
@@ -144,16 +143,28 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         ('FONTSIZE', (0, 0), (-1, 0), 10),
     ]))
 
-    legend_table = Table(legend)
-    legend_table.setStyle(TableStyle([
-        ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
-        ('BACKGROUND', (0, 0), (-1, 0), 'black'),
-        ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, 0), 10),
-    ]))
+    legend_table = Table(legend_data)
+    # legend_table.setStyle(TableStyle([
+    #     ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
+    #     ('BACKGROUND', (0, 0), (-1, 0), 'black'),
+    #     ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
+    #     ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    #     ('FONTSIZE', (0, 0), (-1, 0), 10),
+    #     ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+    # ]))
+    date_style = ParagraphStyle(
+        'DateStyle',
+        parent=getSampleStyleSheet()['Normal'],
+        spaceAfter=12,
+        fontSize=10,
+    )
 
-# only add the completed table if all exercises are done
+
+    styles = style_missing(data)
+    table.setStyle(TableStyle(styles))
+    styles_legend = style_missing_legend(legend_data)
+    legend_table.setStyle(TableStyle(styles_legend, repeatRows=1))
+
     if all_exercises_done:
         elements.append(completed_table)
     elements.append(Spacer(1, 12))
@@ -161,7 +172,6 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     elements.append(Spacer(1, 12))
     elements.append(Spacer(1, 12))
     elements.append(Spacer(1, 12))
-
     elements.append(PageBreak())
 
     elements.append(legend_table)
@@ -172,7 +182,7 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     elements.append(Spacer(1, 12))
     elements.append(Spacer(1, 12))
     elements.append(Spacer(1, 12))
-    elements.append(Paragraph(dt_string, legend_style))
+    elements.append(Paragraph(dt_string, date_style))
     elements.append(Paragraph(CUTOFF_MESSAGE, cutoff_style))
 
     doc.build(elements)
