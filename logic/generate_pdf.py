@@ -33,6 +33,11 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         reader = csv.reader(csv_file)
         data = list(reader)
 
+    legend_file_path = os.getenv('PATH_LEGEND_CSV')
+    with open(legend_file_path, 'r') as legend_file:
+        reader = csv.reader(legend_file)
+        legend_data = list(reader)
+
     first_name = data[0][2]
     full_name = get_last_name(first_name)
     gitu = data[1][2]
@@ -56,6 +61,9 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     cohort_name_style = ParagraphStyle('CohortNameStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=1)
     cutoff_style = ParagraphStyle('CutOffStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=4, fontSize=8)
     date_style = ParagraphStyle('DateStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=12, fontSize=10)
+
+    now = datetime.now()
+    dt_string = now.strftime("%d %B %Y %H:%M:%S")
 
     elements = [
         logo,
