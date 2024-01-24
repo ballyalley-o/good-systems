@@ -1,6 +1,7 @@
 import csv
 import os
 from .constants.constants import *
+from .styles.table import *
 from .check_all import check_rows
 from .style_missing import *
 from reportlab.lib.pagesizes import letter
@@ -12,7 +13,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def get_last_name(first_name):
-
     return os.getenv(f'{first_name.upper()}')
 
 def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
@@ -33,18 +33,8 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         reader = csv.reader(csv_file)
         data = list(reader)
 
-    for row in data[1:]:
-        first_name = data[0][2]
-        full_name = get_last_name(first_name)
-
-# --------------------------------------------------start build pdf--------------------------------------------------
-
-    doc = SimpleDocTemplate(pdf_file_path, pagesize=letter)
-
-    logo_path = os.getenv('PATH_LOGO')
-    logo = Image(logo_path, width=130, height=45)
-
-    name = f'{full_name}' if full_name else first_name
+    first_name = data[0][2]
+    full_name = get_last_name(first_name)
     gitu = data[1][2]
 
     data[1][0] = ''
@@ -53,79 +43,24 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
 
     all_exercises_done = check_rows(data)
 
-    completed_table = Table(data)
+    doc = SimpleDocTemplate(pdf_file_path, pagesize=letter)
+    logo_path = os.getenv('PATH_LOGO')
+    logo = Image(logo_path, width=130, height=45)
 
-    if all_exercises_done:
-        header = [EXERCISES_COMPLETED]
-        completed_table = Table([header])
-        completed_table.setStyle(TableStyle([
-            ('GRID', (0, 0), (-1, -1), 1, (1, 1, 1)),
-            ('BACKGROUND', (0, 0), (-1, 0), 'green'),
-            ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
-            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, 0), 10),
-        ]))
-
-    cohort = os.getenv('COHORT_NAME')
+    name = f'{full_name}' if full_name else first_name
     cohort_name = os.getenv('COHORT_NAME')
 
-    name_style = ParagraphStyle(
-        'NameStyle',
-        parent=getSampleStyleSheet()['Heading2'],
-        spaceAfter=4,
-    )
-
-    gitu_style = ParagraphStyle(
-        'GitUStyle',
-        parent=getSampleStyleSheet()['Normal'],
-        spaceAfter=1,
-    )
-
-    report_card_style = ParagraphStyle(
-        'ReportCardStyle',
-        parent=getSampleStyleSheet()['Heading4'],
-        spaceBefore=2,
-        spaceAfter=1,
-        alignment=1,
-        italics=1
-    )
-
-    cohort_name_style = ParagraphStyle(
-        'CohortNameStyle',
-        parent=getSampleStyleSheet()['Normal'],
-        spaceAfter=1,
-    )
-
-    legend_file_path = os.getenv('PATH_LEGEND_CSV')
-
-    with open(legend_file_path, 'r') as legend_file:
-        reader = csv.reader(legend_file)
-        legend_data = list(reader)
-
-    legend = []
-    for row in legend_data:
-        legend.append(row)
-
-    legend_style = ParagraphStyle(
-        'LegendStyle',
-        parent=getSampleStyleSheet()['Normal'],
-        spaceAfter=1,
-        fontSize=10
-    )
-
-    cutoff_style = ParagraphStyle(
-        'CutOffStyle',
-        parent=getSampleStyleSheet()['Normal'],
-        spaceAfter=4,
-        fontSize=8
-    )
-
-    doc.topMargin -= 20
+    name_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading2'], spaceAfter=4)
+    gitu_style = ParagraphStyle('GitUStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=1)
+    report_card_style = ParagraphStyle('ReportCardStyle', parent=getSampleStyleSheet()['Heading4'], spaceBefore=2, spaceAfter=1, alignment=1, italics=1)
+    cohort_name_style = ParagraphStyle('CohortNameStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=1)
+    cutoff_style = ParagraphStyle('CutOffStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=4, fontSize=8)
+    date_style = ParagraphStyle('DateStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=12, fontSize=10)
 
     elements = [
         logo,
         Spacer(2, 6),
-        Paragraph("Progress Report Card", report_card_style),
+        Paragraph(REPORT_CARD_TITLE, report_card_style),
         Spacer(1, 6),
         Paragraph(name, name_style),
         Paragraph(gitu, gitu_style),
@@ -135,54 +70,35 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     ]
 
     table = Table(data)
-    table.setStyle(TableStyle([
-        ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
-        ('BACKGROUND', (0, 0), (-1, 0), 'black'),
-        ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, 0), 10),
-    ]))
-
+    styles_table = styles_table_main(data)
+    table.setStyle(TableStyle(styles_table))
     legend_table = Table(legend_data)
-    # legend_table.setStyle(TableStyle([
-    #     ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
-    #     ('BACKGROUND', (0, 0), (-1, 0), 'black'),
-    #     ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
-    #     ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-    #     ('FONTSIZE', (0, 0), (-1, 0), 10),
-    #     ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-    # ]))
-    date_style = ParagraphStyle(
-        'DateStyle',
-        parent=getSampleStyleSheet()['Normal'],
-        spaceAfter=12,
-        fontSize=10,
-    )
-
-
     styles = style_missing(data)
     table.setStyle(TableStyle(styles))
     styles_legend = style_missing_legend(legend_data)
     legend_table.setStyle(TableStyle(styles_legend, repeatRows=1))
 
     if all_exercises_done:
+        header = [EXERCISES_COMPLETED]
+        completed_table = Table([header])
+        styles_completed = styles_table_completed(data)
+        completed_table.setStyle(TableStyle(styles_completed))
         elements.append(completed_table)
-    elements.append(Spacer(1, 12))
-    elements.append(table)
-    elements.append(Spacer(1, 12))
-    elements.append(Spacer(1, 12))
-    elements.append(Spacer(1, 12))
-    elements.append(PageBreak())
 
-    elements.append(legend_table)
-
-    now = datetime.now()
-    dt_string = now.strftime("%d %B %Y %H:%M:%S")
-    elements.append(Spacer(1, 12))
-    elements.append(Spacer(1, 12))
-    elements.append(Spacer(1, 12))
-    elements.append(Spacer(1, 12))
-    elements.append(Paragraph(dt_string, date_style))
-    elements.append(Paragraph(CUTOFF_MESSAGE, cutoff_style))
+    elements.extend([
+        Spacer(1, 12),
+        table,
+        Spacer(1, 12),
+        Spacer(1, 12),
+        Spacer(1, 12),
+        PageBreak(),
+        legend_table,
+        Spacer(1, 12),
+        Spacer(1, 12),
+        Spacer(1, 12),
+        Spacer(1, 12),
+        Paragraph(dt_string, date_style),
+        Paragraph(CUTOFF_MESSAGE, cutoff_style)
+    ])
 
     doc.build(elements)
