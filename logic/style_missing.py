@@ -1,7 +1,5 @@
 from .constants.constants import *
 from reportlab.lib import colors
-# Removed unused import statement
-from reportlab.lib.styles import getSampleStyleSheet
 
 def style_missing(data):
 
