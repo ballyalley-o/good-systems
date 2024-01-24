@@ -7,6 +7,7 @@ START_MESSAGE = ' 📇 Started printing the Report Cards . .. '
 START_MESSAGE_PER = ' 📇 Started printing the Report Card for {}'
 DONE_MESSAGE_PER = ' 🏆 Done export Progress Report Card for {} '
 
+REPORT_CARD_TITLE = "Progress Report Card"
 
 # array of values for the legend table
 EXERCISE_STATUS = ['ic', 'L', 'U', 'P']
