@@ -4,7 +4,10 @@ from .constants.constants import *
 from .styles.table import *
 from .check_all import check_rows
 from .style_missing import *
+from .calc_grade_print import calculate_grades_print
+from .m_count import extract_module_number
 from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import Image
@@ -76,6 +79,29 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         Paragraph(cohort_name, cohort_name_style),
         Spacer(1, 12),
     ]
+
+    # grade implementation
+    grades = calculate_grades_print(csv_file_path)
+
+    i = 0
+    while i < len(data):
+        row = data[i]
+        module_name = row[0].rstrip('0123456789')
+        module_no = extract_module_number(module_name)
+        grade = grades.get(module_no)
+
+
+        if row[0] == 'MX' and i > 0 and isinstance(data[i - 1][1], str) and data[i - 1][1].startswith('GRADE:'):
+            data.pop(i - 1)
+
+        if (i == len(data) - 1 or (i + 1 < len(data) and extract_module_number(data[i + 1][0]) != module_no)):
+            if grade is not None:
+                grade_row = ['', f'GRADE: {grade:.2f}', '']
+                # grade_style = ParagraphStyle('GradeStyle', fontSize=8)
+                # grade_row[1] = Paragraph(grade_row[1], grade_style)
+                data.insert(i + 1, grade_row)
+
+        i += 1
 
     table = Table(data)
     styles_table = styles_table_main(data)
