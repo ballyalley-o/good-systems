@@ -1,3 +1,5 @@
+from reportlab.lib import colors
+
 def styles_table_main(data):
 
     styles_table = [
@@ -6,6 +8,9 @@ def styles_table_main(data):
         ('TEXTCOLOR', (0, 0), (-1, 0), 'white'),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('FONTSIZE', (0, 0), (-1, 0), 10),
+        ('TEXTCOLOR', (1, -1), (1, -1), colors.lightgrey),
+        ('LEFTPADDING', (1, 0), (-1, 0), 0),
+        ('RIGHTPADDING', (1, 0), (-1, 0), 0),
     ]
 
     return styles_table
