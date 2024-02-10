@@ -8,3 +8,6 @@ pdf
 __pycache__
 __init__.py
 progress-all.csv
+progress-all.csv.bak
+
+email
