@@ -22,6 +22,9 @@ for i in range(3, 21):
     current_csv_file_path = current_csv_file_path_template.replace('{i}', str(i))
     md_csv_pdf_file(md_file_path, current_csv_file_path, selected_column_index)
 
+# TODO: logic for adding all the content in converting the progress-all.csv to a md file
+    # - get that md content and paste it on IODPROGRESS.md
+
 print('\n')
 print(Fore.GREEN + DONE_MESSAGE + Style.RESET_ALL)
 print('\n')
