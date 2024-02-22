@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Usage: ./update_grade.sh <student> <module> <exercise> <status>
+# Usage: ./grade.sh <student> <module> <exercise> <status>
 
 csv_file="progress-all.csv"
 temp_file="temp.csv"
 
 student=$1
-module=$2
-exercise=$3
+module=M$2
+exercise=$(echo "$3" | tr '[:lower:]' '[:upper:]')
 status=$4
 
 student_name=$(echo "$student" | awk '{print toupper(substr($0, 1, 1)) substr($0, 2)}')
@@ -30,3 +30,4 @@ fi
 # TODO: convert the progress-all.csv and save it as markdown file to gist/progress.md
 # TODO: email pdfs to students
 # TODO: special bgs in the mini-project row for students who are top 3 in the miniproject
+# TODO: modify the all_row to list all the missing exercises across all modules
