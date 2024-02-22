@@ -26,8 +26,7 @@ else
     awk -v row="$row" -v column="$column" -v status="$status" -F, 'BEGIN {OFS = FS} NR == row {if(status=="done") $column="✓"; else $column=status} 1' "$csv_file" > "$temp_file" && mv "$temp_file" "$csv_file"
 fi
 
-
+# TODO: print in a PDF
 # TODO: convert the progress-all.csv and save it as markdown file to gist/progress.md
 # TODO: email pdfs to students
 # TODO: special bgs in the mini-project row for students who are top 3 in the miniproject
-# TODO: modify the all_row to list all the missing exercises across all modules
