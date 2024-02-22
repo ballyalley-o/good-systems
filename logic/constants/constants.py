@@ -12,3 +12,5 @@ REPORT_CARD_TITLE = "Progress Report Card"
 # array of values for the legend table
 EXERCISE_STATUS = ['ic', 'L', 'U', 'P']
 MODULE = 'Module'
+
+MISSING_EXERCISES_MSG = ' ⛔︎ Students MISSING {} - {}:'
