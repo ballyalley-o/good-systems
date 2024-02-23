@@ -30,7 +30,7 @@ def styles_table_completed(data):
 def styles_table_missing(data):
 
     styles_missing = [
-                ('BACKGROUND', (0, 0), (-1, 0), colors.ReportLabFidRed),
+                ('BACKGROUND', (0, 0), (-1, 0), colors._PCMYK_black),
                 ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
 
                 ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -38,7 +38,7 @@ def styles_table_missing(data):
                 ('FONTSIZE', (0, 0), (-1, 0), 14),
 
                 ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                ('BACKGROUND', (0, 1), (-1, -1), colors.white),
                 ('GRID', (0,0), (-1,-1), 1, colors.black)
             ]
 
