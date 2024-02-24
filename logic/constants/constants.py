@@ -15,3 +15,5 @@ MODULE = 'Module'
 
 MISSING_EXERCISES_MSG = ' ⛔︎ Students MISSING {} - {}:'
 MISSING_EXERCISES_MSG_PDF = " <b>STUDENTS MISSING LAB EXERCISES:</b> "
+
+MP1_RANK = 'Mini-Project 1 | ★ TOP {}'
