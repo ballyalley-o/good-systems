@@ -25,6 +25,10 @@ for i in range(3, 21):
 # TODO: logic for adding all the content in converting the progress-all.csv to a md file
     # - get that md content and paste it on IODPROGRESS.md
 
+# TODO: convert the progress-all.csv and save it as markdown file to gist/progress.md
+# TODO: email pdfs to students
+# TODO: special bgs in the mini-project row for students who are top 3 in the miniproject
+
 print('\n')
 print(Fore.GREEN + DONE_MESSAGE + Style.RESET_ALL)
 print('\n')
