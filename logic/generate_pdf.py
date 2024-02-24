@@ -72,6 +72,8 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     csv_path = os.getenv('PATH_ALL_CSV')
     top_students = get_top_students(csv_path)
 
+    text_color = colors.black
+    mp1=''
     if first_name in top_students:
         mp1 = f'{MP1_RANK.format(top_students.index(first_name) + 1)}'
         # mp1 = f'Mini-Project 1 | ★ TOP {top_students.index(first_name) + 1}'
@@ -82,8 +84,7 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         else :
             text_color=colors.brown
 
-
-        mp1_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading4'], spaceAfter=1, textColor=text_color)
+    mp1_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading4'], spaceAfter=1, textColor=text_color)
 
     elements = [
         logo,
