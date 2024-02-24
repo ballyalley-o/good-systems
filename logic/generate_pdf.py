@@ -85,8 +85,6 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
 
         mp1_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading4'], spaceAfter=1, textColor=text_color)
 
-
-
     elements = [
         logo,
         Spacer(2, 6),
