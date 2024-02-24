@@ -40,6 +40,7 @@ def md_csv_pdf_file(md_file_path, csv_file_path, selected_column_index):
 
     generate_pdf(md_csv_pdf_file, selected_file_path, output_file_name)
 
-    print(Back.GREEN + Fore.WHITE + f' 〉CSV file saved:  {csv_file_path} ' + Style.RESET_ALL)
+    # print(Back.GREEN + Fore.WHITE + f' 〉CSV file saved:  {csv_file_path} ' + Style.RESET_ALL)
+    print('\n')
     print(Fore.YELLOW + f' 〉{output_file_name}\'s record saved:  {selected_file_path} ' + Style.RESET_ALL)
     print(Back.RED + Fore.YELLOW + f' 〉PDF file generated: {output_file_name}.pdf ' + Style.RESET_ALL)
