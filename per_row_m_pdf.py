@@ -29,11 +29,11 @@ def get_incomplete_students(csv_file_path, module):
         return incomplete_students
 
 def generate_pdf_report(incomplete_students, module):
-    doc = SimpleDocTemplate(f"pdf/{module}_report.pdf", pagesize=letter)
+    doc = SimpleDocTemplate(f"pdf/missing/{module}_report.pdf", pagesize=letter)
     elements = []
 
     styles = getSampleStyleSheet()
-    header = Paragraph(f"{MISSING_EXERCISES_MSG_PDF}", styles['Heading1'])  # Fix: Added closing parentheses and defined "f" string prefix
+    header = Paragraph(f"{MISSING_EXERCISES_MSG_PDF}", styles['Heading1'])
     elements.append(header)
 
     for exercise, students in incomplete_students.items():
