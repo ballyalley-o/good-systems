@@ -1,6 +1,7 @@
 import csv
 import os
-import sys
+from colorama import Fore, Style
+from logic.constants.constants import *
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -16,7 +17,7 @@ def csv_to_md(csv_file_path, md_file_path):
         for row in data:
             md_file.write('| ' + ' | '.join(row) + ' |\n')
 
-    print(f' File {csv_file_path} has been CONVERTED to {md_file_path}')
+    print(f'{Fore.GREEN} {CONVERTED_MSG} {Style.RESET_ALL}')
 
 csv_file_path = os.getenv('PATH_ALL_CSV')
 md_file_path = os.getenv('PATH_MD')

@@ -16,5 +16,6 @@ MODULE = 'Module'
 
 MISSING_EXERCISES_MSG = ' ⛔︎ Students MISSING {} - {}:'
 MISSING_EXERCISES_MSG_PDF = " <b>STUDENTS MISSING LAB EXERCISES:</b> "
+CONVERTED_MSG = 'CSV has been CONVERTED to MD'
 
 MP1_RANK = 'Mini-Project 1 | ★ TOP {}'
