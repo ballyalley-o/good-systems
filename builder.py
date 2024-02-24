@@ -13,7 +13,7 @@ selected_column_index = 5
 print('\n')
 print(Fore.GREEN + START_MESSAGE + Style.RESET_ALL)
 print('\n')
-print(Fore.YELLOW + f' 〉Markdown file loaded:   {md_file_path} ' + Style.RESET_ALL)
+print(Fore.YELLOW + f'{MARKDOWN_LOADED} {md_file_path} ' + Style.RESET_ALL)
 print('\n')
 
 for i in range(3, 21):
@@ -22,7 +22,6 @@ for i in range(3, 21):
     current_csv_file_path = current_csv_file_path_template.replace('{i}', str(i))
     md_csv_pdf_file(md_file_path, current_csv_file_path, selected_column_index)
 
-# TODO: convert the progress-all.csv and save it as markdown file to gist/progress.md
 # TODO: email pdfs to students
 
 print('\n')
