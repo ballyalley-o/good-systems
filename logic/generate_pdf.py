@@ -6,6 +6,7 @@ from .check_all import check_rows
 from .style_missing import *
 from .calc_grade_print import calculate_grades_print
 from .m_count import extract_module_number
+from build_rank import get_top_students
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, PageBreak
@@ -68,6 +69,24 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     now = datetime.now()
     dt_string = now.strftime("%d %B %Y %H:%M:%S")
 
+    csv_path = os.getenv('PATH_ALL_CSV')
+    top_students = get_top_students(csv_path)
+
+    if first_name in top_students:
+        mp1 = f'{MP1_RANK.format(top_students.index(first_name) + 1)}'
+        # mp1 = f'Mini-Project 1 | ★ TOP {top_students.index(first_name) + 1}'
+        if first_name == top_students[0]:
+            text_color=colors.gold
+        elif first_name == top_students[1]:
+            text_color=colors.silver
+        else :
+            text_color=colors.brown
+
+
+        mp1_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading4'], spaceAfter=1, textColor=text_color)
+
+
+
     elements = [
         logo,
         Spacer(2, 6),
@@ -78,6 +97,7 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         Spacer(1, 4),
         Paragraph(cohort_name, cohort_name_style),
         Spacer(1, 12),
+        Paragraph(mp1, mp1_style),
     ]
 
     # grade implementation
@@ -97,8 +117,6 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         if (i == len(data) - 1 or (i + 1 < len(data) and extract_module_number(data[i + 1][0]) != module_no)):
             if grade is not None:
                 grade_row = ['', f'GRADE: {grade:.2f}', '']
-                # grade_style = ParagraphStyle('GradeStyle', fontSize=8)
-                # grade_row[1] = Paragraph(grade_row[1], grade_style)
                 data.insert(i + 1, grade_row)
 
         i += 1
