@@ -47,8 +47,6 @@ def md_to_csv_file(md_file_path, csv_file_path):
 
     # TODO: SMPT email fro sending the csv file to the students. CHECK smpt-students.py
 
-
-
 md_file_path = os.getenv('PATH_ALL_MD')
 csv_file_path = os.getenv('PATH_ALL_CSV')
 
