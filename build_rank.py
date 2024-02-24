@@ -5,6 +5,16 @@ from reportlab.lib import colors
 from logic.constants.constants import *
 
 def get_top_students(csv_file_path):
+    """
+    Get the top 3 students based on their grades in the mini-project.
+
+    Args:
+        csv_file_path (str): The path to the CSV file.
+
+    Returns:
+        list: The top 3 students.
+
+    """
     with open(csv_file_path, 'r') as f:
         reader = csv.reader(f)
         header = next(reader)
