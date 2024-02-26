@@ -1,0 +1,72 @@
+Module,Project,Dale,Sarah,Nikki,Abby,Colin,Derek,Kevin,Student,Jackie,Ryan,Jack,Mat,Roda,Gia,Georgia,Ethan,Hashley,Tanmay
+Github username,,`@Insaneowl1993`,`@SimianPrimus`,`@NiKi0706`,`@a10mal`,`@siege2000`,`@derek-pham`,`@kevinwdong`,`@transferred`,`@TunaPigeon`,`@Ryancameron555`,`@Daelop`,`@afloormat`,`@rodasamortin`,`@giahp`,`@gmridge`,`@HyndmanEthan`,`@HashleyB`,`@TanmayEke`
+0,Prework,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E1,Node-Git-CLI,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E2,HTML & CSS,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E3,Javascript: DOM,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E4,JS: Logger-Func-Vars,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E5,JS: Array,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E6,Managing JSON,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E8,SRS,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E7,Testing,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E8,Dice,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M1 - E9,GITHUB.io (optional),✓,✓,,,,,,✓,,,,,,,✓,,,
+,,,,,,,,,,,,,,,,,,,
+M2 - P1,Exercises: HTML,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M2 - P2,Exercises: HTML,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+`,Exercises: CSS,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓
+M2 - P3,Lab 2.1: HTML,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,
+M2 - P3,Lab 2.2: CSS Basics,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,,,,✓,✓,✓,✓,
+M2 - P3,Lab 2.3: Flexbox,✓,✓,✓,,✓,✓,✓,✓,✓,✓,,,,✓,✓,✓,✓,
+M2 - P3,Lab 2.4: Website,✓,,✓,✓,U,,✓,✓,,✓,,,,✓,✓,✓,✓,
+M2 - P3,Lab 2.5: Resposive Website,✓,,✓,✓,U,,✓,✓,,✓,,,,✓,✓,✓,✓,
+,,,,,,,,,,,,,,,,,,,
+M3 - E1,JS/TS: Fundamentals,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,
+M3 - E2,JS/TS: Intermediate 1,✓,✓,✓,✓,ic,✓,✓,✓,✓,✓,ic,✓,✓,✓,✓,✓,✓,
+M3 - E2,JS/TS: Intermediate 2,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,
+M3 - E2,JS/TS: Intermediate 3,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,ic,✓,✓,✓,✓,✓,✓,✓
+MX,IS: Presentations Skills,✓,✓,✓,,✓,✓,✓,✓,,✓,✓,✓,✓,✓,✓,✓,✓,
+M3 - E3,JS/TS: Advanced,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,,ic,✓,✓,✓,✓,✓,✓
+M3 - E3,JS/TS: Advanced 2,✓,✓,✓,✓,ic,✓,✓,✓,✓,✓,ic,✓,P,✓,✓,✓,✓,✓
+M3 - E3,JS/TS Lab 3.1: Pizza,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,U,✓,✓,✓,✓,
+,,,,,,,,,,,,,,,,,,,
+M4 - E1,Figma,✓,✓,✓,✓,✓,,✓,✓,✓,✓,✓,✓,U,✓,✓,✓,✓,✓
+M4 - E2,HTML Template,✓,✓,✓,P,✓,,✓,✓,✓,✓,,,x,,✓,✓,,
+M4 - E3,Calculator,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,,,,✓,✓,✓,,
+M4 - E4,Bootstrap Cards,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,,,,✓,✓,✓,,
+M4 - E5,Manage Data,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,,,,✓,✓,✓,,
+M4 - E6,Fetch Data,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,U,,U,✓,✓,✓,,
+M4 - E7,CSS Animations,✓,✓,✓,P,✓,✓,✓,✓,✓,✓,U,✓,U,✓,✓,✓,,
+M4 - E8,Moment JS,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,,,U,✓,✓,✓,,
+M4 - E9,eCharts,✓,✓,✓,P,✓,U,✓,✓,✓,✓,,U,U,✓,✓,✓,U,
+M4 - E10,eCommerce Website,✓,✓,✓,✓,,U,✓,✓,✓,✓,U,U,U,✓,✓,,U,
+,,,,,,,,,,,,,,,,,,,
+M5 - E1,Multi-PORT (express),✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,P,✓,✓,ic,✓,✓,ic,
+M5 - E2,SS Calculator: QUERY PARAMS (mvc),✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,P,ic,,,✓,✓,,
+M5 - E3,SS Calculator: PATH PARAMS (calculator),✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,P,,x,,✓,✓,,
+M5 - E4,SS Calculator: REQ Headers (friendRoutes),✓,✓,✓,✓,✓,ic,✓,✓,✓,✓,P,,,,✓,ic,,
+M5 - E5,SS Calculator: with Controllers,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,P,,x,,✓,✓,,
+M5 - E6,SS Calculator: Libraries/User,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,P,✓,x,,✓,ic,,
+M5 - E7 Part 1,SwaggerUI,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,P,✓,,,✓,ic,,
+M5 - E7 Part 2,eCommerce Website with BACKEND,✓,,✓,,ic,ic,✓,✓,P,✓,,,,,✓,ic,,
+,,,,,,,,,,,,,,,,,,,
+M10 - P1,Docker,✓,✓,✓,ic,✓,✓,✓,✓,✓,✓,ic,✓,✓,✓,✓,✓,ic,
+M10 - P1,Github Actions,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,
+,,,,,,,,,,,,,,,,,,,
+1,MINI-PROJECT,7.33,8,7,9.33,8.67,9,8,10,7.33,7,8,7.33,6.67,6.33,7.67,8,6.33,
+,,,,,,,,,,,,,,,,,,,
+M8 - E1,ERD,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,
+M8 - E2,MONGODB DB-DESIGN,✓,✓,✓,✓,✓,✓,✓,,✓,✓,,,,,✓,,,
+M8 - E3,MySQL DB-DESIGN,✓,,✓,,✓,,✓,,✓,✓,,,,,✓,,,
+M8 - E4,REDIS DB-DESIGN,✓,,✓,,✓,,✓,,,✓,,,,,✓,,,
+,,,,,,,,,,,,,,,,,,,
+M9 - E1,MVC Calculator (M4-E3 REVIEW),✓,✓,✓,✓,✓,✓,✓,✓,✓,✓,,,,,✓,✓,,
+M9 - E2,ExpressAPP MongoDB(Mongoose),P,,✓,✓,✓,✓,✓,,,✓,✓,,✓,✓,✓,x,✓,
+M9 - E3,ExpressAPP Sequelize,P,,✓,✓,✓,✓,✓,,,✓,✓,,✓,✓,✓,x,,
+M9 - E4,ExpressAPP Microservice,,,✓,,✓,,✓,,,✓,ic,,,x,,x,,
+M9 - E5,chatAPP Socket IO,,,✓,,P,,✓,,,P,,,P,,✓,,,
+,,,,,,,,,,,,,,,,,,,
+MX,IS: Storytelling,✓,✓,✓,,✓,,✓,✓,,✓,✓,✓,✓,✓,✓,✓,✓,
+,,,,,,,,,,,,,,,,,,,
+3,MINI-PROJECT,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
