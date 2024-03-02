@@ -76,7 +76,6 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     mp1=''
     if first_name in top_students:
         mp1 = f'{MP1_RANK.format(top_students.index(first_name) + 1)}'
-        # mp1 = f'Mini-Project 1 | ★ TOP {top_students.index(first_name) + 1}'
         if first_name == top_students[0]:
             text_color=colors.gold
         elif first_name == top_students[1]:
