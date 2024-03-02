@@ -34,8 +34,6 @@ def generate_progress_report():
 
     selected_column_index = int(name_index)
 
-# TODO:create a grading system 10/numberofxercise * number completed
-
     print('\n')
     print(Fore.GREEN + START_MESSAGE_PER.format(f'{name}') + Style.RESET_ALL)
     print('\n')
