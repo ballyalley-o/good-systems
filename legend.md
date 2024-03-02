@@ -8,3 +8,4 @@
 |    P    |       in progress       |
 |         |      not submitted      |
 |    U    |       unaccepted        |
+|   \*    |        upcoming         |
