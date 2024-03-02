@@ -21,7 +21,8 @@ def style_missing(data):
 
             elif any(x in row[2] for x in ['L', 'P', 'ic']):
                 styles.append(('BACKGROUND', (2, i), (2, i), colors.lightgoldenrodyellow))
-
+            elif any(x in row[2] for x in ['*']):
+                styles.append(('BACKGROUND', (2, i), (2, i), colors.lightcyan))
 
     return styles
 
@@ -38,7 +39,7 @@ def style_missing_legend(legend_data):
 
     for i, row in enumerate(legend_data, start=0):
         if len(row) > 1:
-            if row[1].startswith(('✓', 'x', 'L', 'ic', 'P', 'U')) and row[1] != 'Element':
+            if row[1].startswith(('✓', 'x', 'L', 'ic', 'P', 'U')) and row[1] != 'Element' or row[2] == 'upcoming':
                 if not row[1]:
                     styles_legend.append(('BACKGROUND', (1, i), (1, i), colors.mistyrose))
                 elif any(x in row[1] for x in ['U', 'x']):
@@ -46,6 +47,8 @@ def style_missing_legend(legend_data):
 
                 elif any(x in row[1] for x in ['L', 'P', 'ic']):
                     styles_legend.append(('BACKGROUND', (1, i), (1, i), colors.lightgoldenrodyellow))
+                elif row[2] == 'upcoming':
+                    styles_legend.append(('BACKGROUND', (1, i), (1, i), colors.lightcyan))
             elif not row[1] and row[2].startswith(('not')):
                 styles_legend.append(('BACKGROUND', (1, i), (1, i), colors.lightcoral))
 
