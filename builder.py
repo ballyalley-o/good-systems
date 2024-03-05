@@ -22,7 +22,6 @@ for i in range(3, 21):
     current_csv_file_path = current_csv_file_path_template.replace('{i}', str(i))
     md_csv_pdf_file(md_file_path, current_csv_file_path, selected_column_index)
 
-# TODO: email pdfs to students
 
 print('\n')
 print(Fore.GREEN + DONE_MESSAGE + Style.RESET_ALL)
