@@ -11,8 +11,9 @@ progress-all.csv
 progress-all.csv.bak
 
 email
-smpt-students.py
 build_top3.py
 
 dummy.csv
 test.pdf
+
+progress-card-smtp.html
