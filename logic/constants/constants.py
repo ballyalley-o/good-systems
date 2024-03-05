@@ -34,3 +34,6 @@ GIST_LEGEND_CUTOFF_ST_MARKER = '<!-- legend here -->'
 GIST_LEGEND_CUTOFF_END_MARKER = '<!-- legend to here -->'
 
 MARKER_NOT_FOUND = 'Start or end marker not found in the original file.'
+
+EMAIL_SUBJECT = 'Progress Report Card'
+EMAIL_CONTENT = 'Attached is your Progress Report to date, please find it for your review.'
