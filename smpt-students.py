@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from logic.constants.constants import *
+from logic.constants.html import html_template
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -36,7 +37,7 @@ def send_email(subject, body, to_email, attachment_path, name):
         message["Cc"] = ', '.join(cc_emails)
     message["Subject"] = subject
 
-    message.attach(MIMEText(body, "plain"))
+    message.attach(MIMEText(body, "html"))
 
     if attachment_path:
         with open(attachment_path, "rb") as attachment:
@@ -49,20 +50,30 @@ def send_email(subject, body, to_email, attachment_path, name):
         server.login(sender_email, sender_password)
         server.sendmail(sender_email, [to_email] + cc_emails, message.as_string())
 
-    print(f"Email with attachment sent successfully to {to_email}")
+    print(f"{EMAIL_SENT.format(to_email)}")
 
 
 subject = EMAIL_SUBJECT
 
-# TODO: put in .env file
-students_attachments = json.loads(os.getenv('SMTP_ATTACHMENTS_TEST'))
+# FIX STRUCTURE OF STUDENTS_EMAIL
+attachments_json_str = os.getenv('SMTP_ATTACHMENTS_TEST')
+
+if attachments_json_str:
+    students_attachments = json.loads(attachments_json_str)
+
+    for student_email, (attachment_path, name) in students_attachments.items():
+        body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT, company=COMPANY_NAME)
+        send_email(subject, body, student_email, attachment_path, name)
+else:
+    print(f"{ERROR_EMAIL}")
 
 
-# Send emails to each student with their individual attachment
-for student_email, (attachment_path, name) in students_attachments.items():
-    body = f"Hi {name},\n\nAttached is your Progress Report to date, please find it for your review."
-    send_email(subject, body, student_email, attachment_path, name)
 
+# for student_email, (attachment_path, name) in students_attachments.items():
+#     body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT)
+#     send_email(subject, body, student_email, attachment_path, name)
 
-
-# TODO: html body instead of plain text.
+    # Send emails to each student with their individual attachment
+# for student_email, (attachment_path, name) in students_attachments.items():
+#     body = f"Hi {name},\n\nAttached is your Progress Report to date, please find it for your review."
+#     send_email(subject, body, student_email, attachment_path, name)
