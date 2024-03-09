@@ -94,24 +94,19 @@ html_template = """
                         "
                       >
                         Hi <strong>{name}</strong>,
-                      </h2>
-                      <p
-                        style="
-                          margin: 0;
-                          -webkit-text-size-adjust: none;
-                          -ms-text-size-adjust: none;
-                          mso-line-height-rule: exactly;
-                          font-family: lato, 'helvetica neue', helvetica, arial,
-                            sans-serif;
-                          line-height: 24px;
-                          font-size: 16px;
-                          color: #000;
-                        "
-                      >
-                        {emailContent}
-                        <br />
-                        <br />
-                        <br />
+                       </h2>
+                     <p style="
+                              margin: 0;
+                              -webkit-text-size-adjust: none;
+                              -ms-text-size-adjust: none;
+                              mso-line-height-rule: exactly;
+                              line-height: 22px;
+                              font-size: 16px;
+                              color: #000;
+                              white-space: pre-wrap;
+                              ">
+                          <span style="display: inline-block; text-indent: -2em;">{emailContent}</span>
+                          <br />
                       </p>
                     </td>
                   </tr>
