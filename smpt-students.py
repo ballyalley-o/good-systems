@@ -66,3 +66,4 @@ with open(os.getenv('SMTP_STUDENT_INFO'), 'r') as csvfile:
         attachment_path = attachment_abs_path
         body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT, company=COMPANY_NAME)
         send_email(subject, body, student_email, attachment_path, name)
+
