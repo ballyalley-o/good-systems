@@ -12,7 +12,7 @@ load_dotenv()
 
 def send_email(subject, body, to_email, attachment_path, name):
     """
-    Sends an email with an optional attachment.
+    Sends an smtp email with an optional attachment for students report card.
 
     Args:
         subject (str): The subject of the email.
