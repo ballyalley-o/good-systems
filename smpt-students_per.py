@@ -10,17 +10,6 @@ load_dotenv()
 subject = EMAIL_SUBJECT
 attachment_abs_path_template = os.getenv('SMTP_ATTACHMENT_ABSOLUTE_PATH')
 
-# with open(os.getenv('SMTP_STUDENT_INFO'), 'r') as csvfile:
-#     reader = csv.DictReader(csvfile)
-#     for row in reader:
-#         name = row['Firstname']
-#         student_email = row['Email']
-#         attachment_abs_path = attachment_abs_path_template.replace('{student_name}', name)
-#         attachment_path = attachment_abs_path
-#         body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT, company=COMPANY_NAME)
-#         send_email(subject, body, student_email, attachment_path, name)
-
-
 specific_student_name = sys.argv[1].capitalize()
 
 with open(os.getenv('SMTP_STUDENT_INFO_TEST'), 'r') as csvfile:
@@ -31,5 +20,11 @@ with open(os.getenv('SMTP_STUDENT_INFO_TEST'), 'r') as csvfile:
             student_email = row['Email']
             attachment_abs_path = attachment_abs_path_template.replace('{student_name}', name)
             attachment_path = attachment_abs_path
-            body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT, company=COMPANY_NAME)
-            send_email(subject, body, student_email, attachment_path, name)
+
+            if len(sys.argv) > 2:
+                if sys.argv[2] == '-u':
+                    body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT_UPDATE, company=COMPANY_NAME)
+                    send_email(subject, body, student_email, attachment_path, name)
+            else:
+                body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT, company=COMPANY_NAME)
+                send_email(subject, body, student_email, attachment_path, name)
