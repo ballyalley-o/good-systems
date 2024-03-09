@@ -164,6 +164,7 @@ html_template = """
             padding-bottom: 55px;
             margin: 0;
             background-color: #000;
+            color: #fff;
           "
         >
           <table
