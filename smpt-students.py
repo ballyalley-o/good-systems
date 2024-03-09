@@ -1,6 +1,7 @@
 import os
 import smtplib
 import json
+import csv
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
@@ -54,26 +55,14 @@ def send_email(subject, body, to_email, attachment_path, name):
 
 
 subject = EMAIL_SUBJECT
+attachment_abs_path_template = os.getenv('SMTP_ATTACHMENT_ABSOLUTE_PATH')
 
-# FIX STRUCTURE OF STUDENTS_EMAIL
-attachments_json_str = os.getenv('SMTP_ATTACHMENTS_TEST')
-
-if attachments_json_str:
-    students_attachments = json.loads(attachments_json_str)
-
-    for student_email, (attachment_path, name) in students_attachments.items():
+with open(os.getenv('SMTP_STUDENT_INFO'), 'r') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        name = row['Firstname']
+        student_email = row['Email']
+        attachment_abs_path = attachment_abs_path_template.replace('{student_name}', name)
+        attachment_path = attachment_abs_path
         body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT, company=COMPANY_NAME)
         send_email(subject, body, student_email, attachment_path, name)
-else:
-    print(f"{ERROR_EMAIL}")
-
-
-
-# for student_email, (attachment_path, name) in students_attachments.items():
-#     body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT)
-#     send_email(subject, body, student_email, attachment_path, name)
-
-    # Send emails to each student with their individual attachment
-# for student_email, (attachment_path, name) in students_attachments.items():
-#     body = f"Hi {name},\n\nAttached is your Progress Report to date, please find it for your review."
-#     send_email(subject, body, student_email, attachment_path, name)
