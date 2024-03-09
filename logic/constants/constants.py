@@ -36,6 +36,7 @@ GIST_LEGEND_CUTOFF_END_MARKER = '<!-- legend to here -->'
 MARKER_NOT_FOUND = 'Start or end marker not found in the original file.'
 
 EMAIL_SUBJECT = 'Progress Report Card'
+EMAIL_SUBJECT_UPDATE = 'Update on your Progress Report Card'
 EMAIL_CONTENT = 'Attached is your Progress Report to date, please find it for your review.'
 EMAIL_CONTENT_UPDATE = f"Thank you for clarifying the exercises progress. We apologize if we missed it previously.\n\n\n\n  Please review the updated Progress card attached."
 COMPANY_NAME = 'Institute of Data'

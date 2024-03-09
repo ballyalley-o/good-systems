@@ -24,7 +24,7 @@ with open(os.getenv('SMTP_STUDENT_INFO_TEST'), 'r') as csvfile:
             if len(sys.argv) > 2:
                 if sys.argv[2] == '-u':
                     body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT_UPDATE, company=COMPANY_NAME)
-                    send_email(subject, body, student_email, attachment_path, name)
+                    send_email(EMAIL_SUBJECT, body, student_email, attachment_path, name)
             else:
                 body = html_template.format(header=os.getenv('SMTP_EMAIL_HEADER'), name=name, emailContent=EMAIL_CONTENT, company=COMPANY_NAME)
-                send_email(subject, body, student_email, attachment_path, name)
+                send_email(EMAIL_SUBJECT, body, student_email, attachment_path, name)
