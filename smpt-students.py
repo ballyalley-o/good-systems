@@ -10,7 +10,7 @@ load_dotenv()
 subject = EMAIL_SUBJECT
 attachment_abs_path_template = os.getenv('SMTP_ATTACHMENT_ABSOLUTE_PATH')
 
-with open(os.getenv('SMTP_STUDENT_INFO_TEST'), 'r') as csvfile:
+with open(os.getenv('SMTP_STUDENT_INFO'), 'r') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         name = row['Firstname']
