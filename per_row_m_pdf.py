@@ -28,8 +28,12 @@ def get_incomplete_students(csv_file_path, module):
 
         return incomplete_students
 
+
+
 def generate_pdf_report(incomplete_students, module):
-    doc = SimpleDocTemplate(f"pdf/missing/{module}_report.pdf", pagesize=letter)
+    missing_pdf_path_template = os.getenv('PATH_MISSING_PDF')
+    missing_pdf_path = missing_pdf_path_template.replace('{module}', module)
+    doc = SimpleDocTemplate(missing_pdf_path, pagesize=letter)
     elements = []
 
     styles = getSampleStyleSheet()
