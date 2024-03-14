@@ -16,6 +16,8 @@ from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
 
+bronze = colors.Color(0.8, 0.5, 0.2)
+
 def get_last_name(first_name):
     return os.getenv(f'{first_name.upper()}')
 
@@ -70,20 +72,33 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     dt_string = now.strftime("%d %B %Y %H:%M:%S")
 
     csv_path = os.getenv('PATH_ALL_CSV')
-    top_students = get_top_students(csv_path)
+    top_students_all = get_top_students(csv_path)
 
-    text_color = colors.black
-    mp1=''
-    if first_name in top_students:
-        mp1 = f'{MP1_RANK.format(top_students.index(first_name) + 1)}'
-        if first_name == top_students[0]:
-            text_color=colors.gold
-        elif first_name == top_students[1]:
-            text_color=colors.silver
-        else :
-            text_color=colors.brown
+    def calculate_rank_and_color(first_name, top_students, rank_format, each_mp):
+        text_color = colors.black
+        mp = ''
 
-    mp1_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading4'], spaceAfter=1, textColor=text_color)
+        if first_name in top_students:
+            mp = rank_format.format(each_mp, top_students.index(first_name) + 1)
+            if first_name == top_students[0]:
+                text_color = colors.gold
+            elif first_name == top_students[1]:
+                text_color = colors.silver
+            else:
+                text_color = bronze
+
+        return mp, text_color
+
+    top_students_all = get_top_students(csv_path)
+
+    mps = []
+    styles = []
+
+    for mp in DONE:
+        mp_rank, text_color = calculate_rank_and_color(first_name, top_students_all[mp], MP_RANK, mp)
+        mp_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading4'], spaceAfter=1, textColor=text_color)
+        mps.append(mp_rank)
+        styles.append(mp_style)
 
     elements = [
         logo,
@@ -95,10 +110,10 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         Spacer(1, 4),
         Paragraph(cohort_name, cohort_name_style),
         Spacer(1, 12),
-        Paragraph(mp1, mp1_style),
     ]
+    for mp, style in zip(mps, styles):
+        elements.append(Paragraph(mp, style))
 
-    # grade implementation
     grades = calculate_grades_print(csv_file_path)
 
     i = 0
@@ -136,7 +151,6 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         elements.append(completed_table)
 
     elements.extend([
-        Spacer(1, 12),
         table,
         Spacer(1, 12),
         Spacer(1, 12),
