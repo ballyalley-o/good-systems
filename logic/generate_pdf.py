@@ -96,7 +96,7 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
 
     for mp in DONE:
         mp_rank, text_color = calculate_rank_and_color(first_name, top_students_all[mp], MP_RANK, mp)
-        mp_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading4'], spaceAfter=1, textColor=text_color)
+        mp_style = ParagraphStyle('NameStyle', parent=getSampleStyleSheet()['Heading4'], textColor=text_color)
         mps.append(mp_rank)
         styles.append(mp_style)
 
@@ -109,7 +109,7 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         Paragraph(gitu, gitu_style),
         Spacer(1, 4),
         Paragraph(cohort_name, cohort_name_style),
-        Spacer(1, 12),
+        Spacer(1, 6),
     ]
     for mp, style in zip(mps, styles):
         elements.append(Paragraph(mp, style))
@@ -151,6 +151,7 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         elements.append(completed_table)
 
     elements.extend([
+        Spacer(1, 6),
         table,
         Spacer(1, 12),
         Spacer(1, 12),
