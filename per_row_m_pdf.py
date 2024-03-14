@@ -41,9 +41,10 @@ def generate_pdf_report(incomplete_students, module):
     elements.append(header)
 
     for exercise, students in incomplete_students.items():
-        if students:
+        filtered_students = [student for student in students if student not in ["Tanmay", "Student"]]
+        if filtered_students:
             data = [[f"{exercise}:"]]
-            data.extend([[student] for student in students])
+            data.extend([[student] for student in filtered_students])
             table = Table(data, colWidths=460)
             table.setStyle(TableStyle(styles_table_missing(data)))
             elements.append(table)
