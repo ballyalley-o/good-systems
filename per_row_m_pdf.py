@@ -29,7 +29,6 @@ def get_incomplete_students(csv_file_path, module):
         return incomplete_students
 
 
-
 def generate_pdf_report(incomplete_students, module):
     missing_pdf_path_template = os.getenv('PATH_MISSING_PDF')
     missing_pdf_path = missing_pdf_path_template.replace('{module}', module)
