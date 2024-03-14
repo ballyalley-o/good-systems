@@ -22,7 +22,7 @@ def get_incomplete_students(csv_file_path, module, exercise):
 
         return incomplete_students
 
-csv_file_path =  os.getenv('PATH_ALL_CSV')
+csv_file_path = os.getenv('PATH_ALL_CSV')
 module = sys.argv[1]
 exercise = sys.argv[2]
 incomplete_students = get_incomplete_students(csv_file_path, module, exercise)
