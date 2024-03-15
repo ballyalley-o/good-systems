@@ -78,14 +78,16 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         text_color = colors.black
         mp = ''
 
-        if first_name in top_students:
-            mp = rank_format.format(each_mp, top_students.index(first_name) + 1)
-            if first_name == top_students[0]:
-                text_color = colors.gold
-            elif first_name == top_students[1]:
-                text_color = colors.silver
-            else:
-                text_color = bronze
+        for rank, group in enumerate(top_students, start=1):
+            if first_name in [student for student, _ in group]:
+                mp = rank_format.format(each_mp, rank)
+                if rank == 1:
+                    text_color = colors.gold
+                elif rank == 2:
+                    text_color = colors.silver
+                else:
+                    text_color = bronze
+                break
 
         return mp, text_color
 
