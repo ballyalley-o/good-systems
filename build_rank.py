@@ -4,6 +4,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 from logic.constants.constants import *
+from itertools import groupby
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -25,6 +26,7 @@ def get_top_students(csv_file_path):
         header = next(reader)
         students = header[2:]
 
+
         for done in DONE:
             grades = {}
             for row in reader:
@@ -34,20 +36,37 @@ def get_top_students(csv_file_path):
 
             print(f"Grades for {done}: {grades}")
 
-            top_students = sorted(grades, key=grades.get, reverse=True)[:3]
+            sorted_students = sorted(grades.items(), key=lambda x: x[1], reverse=True)
+
+            top_groups = []
+            current_group = [sorted_students[0]]
+
+            for student, grade in sorted_students[1:]:
+                if grade == current_group[0][1]:
+                    current_group.append((student, grade))
+                else:
+                    top_groups.append(current_group)
+                    current_group = [(student, grade)]
+
+                if len(top_groups) == 3:
+                    break
+
+            if len(top_groups) < 3 and current_group:
+                top_groups.append(current_group)
+
+            top_students = [group for group in top_groups]
+
+            tied_students = [group for group in top_students if len(group) > 1]
 
             print(f"Top students for {done}: {top_students}")
             print('\n')
 
-            # Add the top students for the current item to the top_students_all dictionary
             top_students_all[done] = top_students
 
-            # Reset the CSV reader to the beginning of the file
             f.seek(0)
-            next(reader)  # Skip the header
+            next(reader)
 
-    return top_students_all
-
+        return top_students_all
 
 
 csv_file_path = os.getenv('PATH_ALL_CSV')
