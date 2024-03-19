@@ -56,8 +56,6 @@ def replace_content(original_file_path, md_file_path, legend_file_path):
     new_content = original_content[:start_index + len(GIST_CUTOFF_ST_MARKER)] + '\n' + md_content + '\n' + original_content[end_index:]
     new_content_with_legend = new_content[:legend_start_index + len(GIST_LEGEND_CUTOFF_ST_MARKER)] + '\n' + legend_content + '\n' + original_content[legend_end_index:]
 
-    print(new_content_with_legend)
-
     with open(original_file_path, 'w') as file:
         file.write(new_content)
 
