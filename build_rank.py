@@ -34,7 +34,7 @@ def get_top_students(csv_file_path):
                     for i, grade in enumerate(row[2:], start=2):
                         grades[students[i - 2]] = grade
 
-            print(f"Grades for {done}: {grades}")
+            # print(f"Grades for {done}: {grades}")
 
             sorted_students = sorted(grades.items(), key=lambda x: x[1], reverse=True)
 
