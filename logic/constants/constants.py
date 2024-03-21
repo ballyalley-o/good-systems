@@ -1,3 +1,4 @@
+CUTOFF_MESSAGE_0 = '  Mini-Projects are graded until all students presentations are completed. '
 CUTOFF_MESSAGE = '  If you\'ve submitted completed exercises after receiving this email, please inform your trainers. '
 EXERCISES_COMPLETED = ' ALL EXERCISES COMPLETED '
 
