@@ -59,8 +59,8 @@ def replace_content(original_file_path, md_file_path, legend_file_path):
     with open(original_file_path, 'w') as file:
         file.write(new_content)
 
-    with open(original_file_path, 'w') as file:
-        file.write(new_content_with_legend)
+    # with open(original_file_path, 'w') as file:
+    #     file.write(new_content_with_legend)
 
     print(f' ▶︎ {Fore.GREEN} {CONVERTED_MSG} {Style.RESET_ALL}')
     print('\n')
