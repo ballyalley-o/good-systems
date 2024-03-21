@@ -165,6 +165,7 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         Spacer(1, 12),
         Spacer(1, 12),
         Paragraph(dt_string, date_style),
+        Paragraph(CUTOFF_MESSAGE_0, cutoff_style),
         Paragraph(CUTOFF_MESSAGE, cutoff_style)
     ])
 
