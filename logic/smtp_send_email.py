@@ -30,7 +30,8 @@ def send_email(subject, body, to_email, attachment_path, name):
     message = MIMEMultipart()
     message["From"] = "Institute of Data"
     message["To"] = to_email
-    cc_emails = os.getenv('SMTP_CC_TEST').split(';')
+    # dont forget to change cc for real use
+    cc_emails = os.getenv('SMTP_CC').split(';')
 
     if cc_emails:
         message["Cc"] = ', '.join(cc_emails)
