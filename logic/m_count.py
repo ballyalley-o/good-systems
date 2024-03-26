@@ -15,9 +15,12 @@ def get_last_name(first_name):
     return os.getenv(f'{first_name.upper()}')
 
 def extract_module_number(module_name):
-    match = re.search(r'M(\d+)', module_name)
-
-    return match.group(1) if match else None
+    if module_name.startswith("MX"):
+        match = re.search(r'M([A-Za-z])', module_name)
+        return match.group(1) if match else None
+    else:
+        match = re.search(r'M(\d+)', module_name)
+        return match.group(1) if match else None
 
 def count_missing_exercises(csv_file_path):
     missing_counts = {}
