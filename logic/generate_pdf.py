@@ -125,10 +125,6 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         module_no = extract_module_number(module_name)
         grade = grades.get(module_no)
 
-
-        if row[0] == 'MX' and i > 0 and isinstance(data[i - 1][1], str) and data[i - 1][1].startswith('GRADE:'):
-            data.pop(i - 1)
-
         if (i == len(data) - 1 or (i + 1 < len(data) and extract_module_number(data[i + 1][0]) != module_no)):
             if grade is not None:
                 grade_row = ['', f'GRADE: {grade:.2f}', '']
