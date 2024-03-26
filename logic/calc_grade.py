@@ -7,8 +7,12 @@ load_dotenv()
 
 
 def extract_module_number(module_name):
-    match = re.search(r'M(\d+)', module_name)
-    return match.group(1) if match else None
+    if module_name.startswith("MX"):
+        match = re.search(r'M([A-Za-z])', module_name)
+        return match.group(1) if match else None
+    else:
+        match = re.search(r'M(\d+)', module_name)
+        return match.group(1) if match else None
 
 def calculate_grades(csv_file_path):
     def get_last_name(first_name):
@@ -22,11 +26,11 @@ def calculate_grades(csv_file_path):
         completed_exercises = {}
 
         for row in reader:
-            module_name = row[0].rstrip('0123456789')
+            module_name = row[0]
             module_no = extract_module_number(module_name)
             exercise_status = row[2] if len(row) > 2 else None
 
-            if module_no is not None and 'X' not in module_name:
+            if module_no is not None:
                 total_exercises.setdefault(module_no, 0)
                 total_exercises[module_no] += 1
 
@@ -35,6 +39,7 @@ def calculate_grades(csv_file_path):
                     completed_exercises[module_no] += 1
 
         grades = {}
+
         for module_no in total_exercises.keys():
             total = total_exercises[module_no]
             completed = completed_exercises.get(module_no, 0)
