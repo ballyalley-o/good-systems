@@ -6,7 +6,7 @@ def check_rows(data):
 
             if not row[2]:
                 return False
-
+            # this checks the upcoming mini prjects so that they are not included in the grade calculation
             if row[0] in UPCOMING:
                 return True
 
