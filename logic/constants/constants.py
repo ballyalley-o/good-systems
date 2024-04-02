@@ -15,8 +15,8 @@ MINI_PROJECT = 'MINI-PROJECT'
 # array of values for the legend table
 EXERCISE_STATUS = ['ic', 'L', 'U', 'P']
 # TODO: AUTOMATE THIS - ADDING OF MINI-PROJECTS TO CHECK | but for now it's hardcoded
-UPCOMING = ['2', 'CAPSTONE']
-DONE = ['1', '3']
+UPCOMING = ['CAPSTONE']
+DONE = ['1','2','3']
 MODULE = 'Module'
 
 MISSING_EXERCISES_MSG = ' ⛔︎ Students MISSING {} - {}:'
