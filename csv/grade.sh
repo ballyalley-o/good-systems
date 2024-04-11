@@ -54,7 +54,7 @@ else
     exercise=$(echo "$3" | tr '[:lower:]' '[:upper:]')
     status=$4
 
-    row=$(grep -n -i "^$module - $exercise" "$csv_file" | cut -d: -f1)
+    row=$(grep -n -i "^$module - $exercise" "$csv_file" | cut -d: -f1 | head -n 1)
     awk -v row="$row" -v column="$column" -v status="$status" -F, 'BEGIN {OFS = FS} NR == row {if(status=="done") $column="✓"; else if(status=="no") $column=""; else $column=status} 1' "$csv_file" > "$temp_file" && mv "$temp_file" "$csv_file"
 fi
 
