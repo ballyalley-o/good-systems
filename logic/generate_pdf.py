@@ -65,7 +65,9 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     gitu_style = ParagraphStyle('GitUStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=1)
     report_card_style = ParagraphStyle('ReportCardStyle', parent=getSampleStyleSheet()['Heading4'], spaceBefore=2, spaceAfter=1, alignment=1, italics=1)
     cohort_name_style = ParagraphStyle('CohortNameStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=1)
+    cutoff_header_style = ParagraphStyle('CutOffStyle', parent=getSampleStyleSheet()['Heading5'], spaceAfter=4, fontSize=8)
     cutoff_style = ParagraphStyle('CutOffStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=4, fontSize=8)
+    cutoff_sub_style = ParagraphStyle('CutOffStyle', parent=getSampleStyleSheet()['Heading5'], spaceAfter=4, fontSize=6)
     date_style = ParagraphStyle('DateStyle', parent=getSampleStyleSheet()['Normal'], spaceAfter=12, fontSize=10)
 
     now = datetime.now()
@@ -141,12 +143,68 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
     styles_legend = style_missing_legend(legend_data)
     legend_table.setStyle(TableStyle(styles_legend, repeatRows=1))
 
+    # final awards
+    # TODO: automate this
+
+    if first_name == os.getenv('EXCELLENCE_AWARD'):
+        header = [EXCELLENCE_AWARDEE]
+        excellence_table = Table([header])
+        styles_excellence = styles_table_excellence(data)
+        excellence_table.setStyle(TableStyle(styles_excellence))
+        elements.append(excellence_table)
+
+    if first_name == os.getenv('CONSISTENCY_AWARD'):
+        header = [CONSISTENCY_AWARDEE]
+        consistency_table = Table([header])
+        styles_consistency = styles_table_consistency(data)
+        consistency_table.setStyle(TableStyle(styles_consistency))
+        elements.append(consistency_table)
+
+    if first_name == os.getenv('ENGAGEMENT_AWARD'):
+        header = [ENGAGEMENT_AWARDEE]
+        engagement_table = Table([header])
+        styles_engagement = styles_table_engagement(data)
+        engagement_table.setStyle(TableStyle(styles_engagement))
+        elements.append(engagement_table)
+
+    if first_name == os.getenv('SYNERGY_MAESTRO_AWARD'):
+        header = [SYNERGY_MAESTRO_AWARDEE]
+        synergy_maestro_table = Table([header])
+        styles_synergy_maestro = styles_table_team_player(data)
+        synergy_maestro_table.setStyle(TableStyle(styles_synergy_maestro))
+        elements.append(synergy_maestro_table)
+
+    if first_name in os.getenv('TOP_CAPSTONE'):
+        header = [TOP_CAPSTONE]
+        top_capstone_table = Table([header])
+        styles_top_capstone = styles_table_capstone(data)
+        top_capstone_table.setStyle(TableStyle(styles_top_capstone))
+        elements.append(top_capstone_table)
+
     if all_exercises_done:
         header = [EXERCISES_COMPLETED]
         completed_table = Table([header])
         styles_completed = styles_table_completed(data)
         completed_table.setStyle(TableStyle(styles_completed))
         elements.append(completed_table)
+
+
+    ex_runner_ups = os.getenv('EXCELLENCE_AWARD_RUNNER_UP')
+    runner_up_list = ex_runner_ups.split(";")
+
+    co_runner_ups = os.getenv('CONSISTENCY_AWARD_RUNNER_UP')
+    co_runner_up_list = co_runner_ups.split(";")
+
+    en_runner_ups = os.getenv('ENGAGEMENT_AWARD_RUNNER_UP')
+    en_runner_up_list = en_runner_ups.split(";")
+
+    sm_runner_ups = os.getenv('SYNERGY_MAESTRO_RUNNER_UP')
+    sm_runner_up_list = sm_runner_ups.split(";")
+
+    tc_runner_ups = os.getenv('TOP_CAPSTONE')
+    tc_runner_up_list = tc_runner_ups.split(";")
+
+
 
     elements.extend([
         Spacer(1, 6),
@@ -161,8 +219,31 @@ def generate_pdf(md_csv_pdf_file, csv_file_path, output_file_name):
         Spacer(1, 12),
         Spacer(1, 12),
         Paragraph(dt_string, date_style),
+        Paragraph(CUTOFF_MESSAGE, cutoff_style),
+        Spacer(1, 12),
+
+        Paragraph(CUTOFF_HEADER_1, cutoff_header_style),
+        Paragraph(CUTOFF_MESSAGE_1, cutoff_style),
+        Paragraph(CUTOFF_MESSAGE_1_1.format(runner_up_list[0], runner_up_list[1], runner_up_list[2]), cutoff_sub_style),
+
+        Paragraph(CUTOFF_HEADER_2, cutoff_header_style),
+        Paragraph(CUTOFF_MESSAGE_2, cutoff_style),
+        Paragraph(CUTOFF_MESSAGE_2_1.format(co_runner_up_list[0], co_runner_up_list[1], co_runner_up_list[2]), cutoff_sub_style),
+
+        Paragraph(CUTOFF_HEADER_3, cutoff_header_style),
+        Paragraph(CUTOFF_MESSAGE_3, cutoff_style),
+        Paragraph(CUTOFF_MESSAGE_3_1.format(en_runner_up_list[0], en_runner_up_list[1], en_runner_up_list[2]), cutoff_sub_style),
+
+        Paragraph(CUTOFF_HEADER_4, cutoff_header_style),
+        Paragraph(CUTOFF_MESSAGE_4, cutoff_style),
+        Paragraph(CUTOFF_MESSAGE_4_1.format(sm_runner_up_list[0], sm_runner_up_list[1]), cutoff_sub_style),
+
+        Paragraph(CUTOFF_HEADER_5, cutoff_header_style),
+        Paragraph(CUTOFF_MESSAGE_5_1.format(tc_runner_up_list[0], tc_runner_up_list[1], tc_runner_up_list[2]), cutoff_sub_style),
+
+        Spacer(1, 12),
+        Spacer(1, 12),
         Paragraph(CUTOFF_MESSAGE_0, cutoff_style),
-        Paragraph(CUTOFF_MESSAGE, cutoff_style)
     ])
 
     doc.build(elements)
